@@ -1,6 +1,6 @@
 {
     "name": "monogramm/wp-plugin-template",
-    "description": "WordPress Plugin template with Unit Tests and docker env",
+    "description": "WP Plugin Template with Unit Tests and docker env",
     "homepage": "https://github.com/Monogramm/wp-plugin-template/upload/develop",
     "license": "AGPL",
     "version": "0.1.0",

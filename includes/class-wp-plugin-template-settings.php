@@ -127,8 +127,8 @@ class WP_Plugin_Template_Settings {
 			array(
 				'location'    => 'options', // Possible settings: options, menu, submenu.
 				'parent_slug' => 'options-general.php',
-				'page_title'  => __( 'Plugin Settings', 'wp-plugin-template' ),
-				'menu_title'  => __( 'Plugin Settings', 'wp-plugin-template' ),
+				'page_title'  => __( 'WP Plugin Template Settings', 'wp-plugin-template' ),
+				'menu_title'  => __( 'WP Plugin Template Settings', 'wp-plugin-template' ),
 				'capability'  => 'manage_options',
 				'menu_slug'   => $this->parent->_token . '_settings',
 				'function'    => array( $this, 'settings_page' ),
@@ -398,7 +398,7 @@ class WP_Plugin_Template_Settings {
 
 		// Build page HTML.
 		$html      = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
-			$html .= '<h2>' . __( 'Plugin Settings', 'wp-plugin-template' ) . '</h2>' . "\n";
+			$html .= '<h2>' . __( 'WP Plugin Template Settings', 'wp-plugin-template' ) . '</h2>' . "\n";
 
 			$tab = '';
 		//phpcs:disable

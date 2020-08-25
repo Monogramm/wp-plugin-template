@@ -20,7 +20,7 @@ build() {
 
     # PHP Composer install and code fixer
     #composer install
-    ./vendor/bin/phpcbf
+    #./vendor/bin/phpcbf
 }
 
 prepare_release() {
@@ -74,7 +74,8 @@ usage() {
 
 case "${1}" in
     # DEV env
-    start) docker-compose up -d ${@:2};;
+    start) docker-compose up -d ${@:2}
+    chown 'www-data:www-data' -R '/srv/wordpress/html/wp-content';;
     stop) docker-compose down ${@:2};;
     logs) docker-compose logs -f ${@:2};;
     reset) docker-compose down

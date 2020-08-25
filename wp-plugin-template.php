@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WordPress Plugin Template
+ * Plugin Name: WP Plugin Template
  * Version: 0.1.0
  * Plugin URI: https://github.com/Monogramm/wp-plugin-template/
- * Description: WordPress Plugin template with Unit Tests and docker env
+ * Description: WP Plugin Template with Unit Tests and docker env
  * Author: Monogramm
  * Author URI: http://www.monogramm.io/
  * Requires at least: 5.2

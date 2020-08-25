@@ -1,8 +1,8 @@
 # Copyright (C) 2020 Monogramm
-# This file is distributed under the same license as the WordPress Plugin Template package.
+# This file is distributed under the same license as the WP Plugin Template package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPress Plugin Template 0.1.0\n"
+"Project-Id-Version: WP Plugin Template 0.1.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/wp-plugin-template\n"
 "POT-Creation-Date: 2020-08-25 11:09:26+00:00\n"
@@ -32,7 +32,7 @@ msgstr ""
 #: includes/class-wp-plugin-template-settings.php:130
 #: includes/class-wp-plugin-template-settings.php:131
 #: includes/class-wp-plugin-template-settings.php:401
-msgid "Plugin Settings"
+msgid "WP Plugin Template Settings"
 msgstr ""
 
 #: includes/class-wp-plugin-template-settings.php:179
@@ -357,7 +357,7 @@ msgid "No %s found"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "WordPress Plugin Template"
+msgid "WP Plugin Template"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -365,7 +365,7 @@ msgid "https://github.com/Monogramm/wp-plugin-template/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "WordPress Plugin template with Unit Tests and docker env"
+msgid "WP Plugin Template with Unit Tests and docker env"
 msgstr ""
 
 #. Author of the plugin/theme

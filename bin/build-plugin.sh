@@ -29,7 +29,7 @@ mkdir -p "$FOLDER"
 cd "$FOLDER/$SLUG"
 
 rm -rf .git
-rm build-plugin.sh
+rm bin/build-plugin.sh
 
 if [ "$GRUNT" == "n" ]; then
 	rm Gruntfile.js
@@ -49,7 +49,9 @@ mv "includes/lib/class-$DEFAULT_SLUG-post-type.php" "includes/lib/class-$SLUG-po
 mv "includes/lib/class-$DEFAULT_SLUG-taxonomy.php" "includes/lib/class-$SLUG-taxonomy.php"
 mv "includes/lib/class-$DEFAULT_SLUG-admin-api.php" "includes/lib/class-$SLUG-admin-api.php"
 
-for f in README.md readme.txt "$SLUG.php" "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php"
+mv "tests/$DEFAULT_CLASS.php" "tests/$CLASS.php"
+
+for f in README.md readme.txt 'uninstall.php' "$SLUG.php" admin/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "tests/$CLASS.php" '.env' '.travis.yml' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md'
 do
 	cp "$f" "$f.tmp"
 	sed "s/$DEFAULT_NAME/$NAME/g" "$f.tmp" > "$f"

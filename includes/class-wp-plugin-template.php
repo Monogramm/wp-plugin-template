@@ -121,6 +121,7 @@ class WP_Plugin_Template {
 		$this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		register_activation_hook( $this->file, array( $this, 'install' ) );
+		register_uninstall_hook( $this->file, array( $this, 'uninstall' ) );
 
 		// Load frontend JS & CSS.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
@@ -320,5 +321,27 @@ class WP_Plugin_Template {
 	private function _log_version_number() { //phpcs:ignore
 		update_option( $this->_token . '_version', $this->_version );
 	} // End _log_version_number ()
+
+	/**
+	 * Uninstallation. Runs on uninstall.
+	 *
+	 * @access  public
+	 * @return  void
+	 * @since   0.1.0
+	 */
+	public function uninstall() {
+		$this->_delete_version_number();
+	} // End deactivate ()
+
+	/**
+	 * Remove the plugin version number.
+	 *
+	 * @access  public
+	 * @return  void
+	 * @since   0.1.0
+	 */
+	private function _delete_version_number() { //phpcs:ignore
+		delete_option( $this->_token . '_version' );
+	} // End _delete_version_number ()
 
 }

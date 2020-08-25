@@ -1,0 +1,49 @@
+os: linux
+dist: bionic
+
+services: docker
+
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+jobs:
+  include:
+    - php: 7.4
+      env: WP_VERSION=5.5
+    - php: 7.3
+      env: WP_VERSION=5.5
+    - php: 7.3
+      env: WP_VERSION=5.4
+    - php: 7.3
+      env: WP_VERSION=5.3
+    - php: 7.2
+      env: WP_VERSION=5.5
+    - php: 7.2
+      env: WP_VERSION=5.4
+    - php: 7.2
+      env: WP_VERSION=5.3
+
+install:
+  - docker-compose build
+
+before_script:
+  - docker-compose up -d
+
+script:
+  - docker-compose ps
+  - echo "Wait until tests are done" && sleep 180
+  - docker-compose ps
+  - docker-compose logs sut
+  - docker-compose ps sut | grep exit 0

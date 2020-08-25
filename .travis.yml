@@ -23,6 +23,7 @@ jobs:
     - env: WP_VERSION=5.5
     - env: WP_VERSION=5.4
     - env: WP_VERSION=5.3
+    - env: WP_VERSION=5.2
 
 install:
   - docker-compose build
@@ -36,3 +37,4 @@ script:
   - docker-compose ps
   - docker-compose logs sut
   - docker-compose ps sut | grep 'Exit 0'
+  - docker-compose exec -T --user www-data wordpress wp plugin activate wp-plugin-template

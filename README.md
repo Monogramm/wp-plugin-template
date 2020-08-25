@@ -143,6 +143,7 @@ This template includes the following features:
 -   Automated tests and code quality monitoring using PHPUnit, PHPCS
 -   GitHub and GitLab templates for Issues and Pull Requests
 -   Docker dev and test environments for easy integration into any CI (with current integration to Travis CI)
+-   Plugin install and uninstall hooks
 
 See the [changelog](https://github.com/Monogramm/wp-plugin-template/blob/master/changelog.txt) for a complete list of changes as the template develops.
 

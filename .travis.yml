@@ -21,10 +21,6 @@ cache:
 jobs:
   include:
     - env: WP_VERSION=5.5
-    - env: WP_VERSION=5.5
-    - env: WP_VERSION=5.4
-    - env: WP_VERSION=5.3
-    - env: WP_VERSION=5.5
     - env: WP_VERSION=5.4
     - env: WP_VERSION=5.3
 
@@ -39,4 +35,4 @@ script:
   - echo "Wait until tests are done" && sleep 180
   - docker-compose ps
   - docker-compose logs sut
-  - docker-compose ps sut | grep 'exit 0'
+  - docker-compose ps sut | grep 'Exit 0'

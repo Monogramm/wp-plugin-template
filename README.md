@@ -1,5 +1,5 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/wp-plugin-template/)
+[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://wordpress.org/plugins/wp-plugin-template/)
 [![gitmoji-changelog](https://img.shields.io/badge/Changelog-gitmoji-blue.svg)](https://github.com/frinyvonnick/gitmoji-changelog)
 [![Build Status](https://travis-ci.org/Monogramm/wp-plugin-template.svg)](https://travis-ci.org/Monogramm/wp-plugin-template)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/34921e8a9c4e45f599438db801f57779)](https://www.codacy.com/gh/Monogramm/wp-plugin-template?utm_source=github.com&utm_medium=referral&utm_content=Monogramm/wp-plugin-template&utm_campaign=Badge_Grade)
@@ -27,7 +27,7 @@ This template is highly inspired from [hlashbrooke/WordPress Plugin Template](ht
 
 ## :blue_book: Docs
 
-See GitHub Pages at [monogramm.github.io/**wp-plugin-template**](https://monogramm.github.io/wp-plugin-template/).
+See WordPress.org plugin at [wordpress.org/plugins/wp-plugin-template](https://wordpress.org/plugins/wp-plugin-template/).
 
 ## :chart_with_upwards_trend: Changes
 

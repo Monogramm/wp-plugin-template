@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	die;
 }
 
 /**
@@ -114,7 +114,7 @@ class WP_Plugin_Template {
 
 		// Load plugin environment variables.
 		$this->file       = $file;
-		$this->dir        = dirname( $this->file );
+		$this->dir        = dirname( plugin_basename( $this->file ) );
 		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
 		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $this->file ) ) );
 
@@ -242,7 +242,7 @@ class WP_Plugin_Template {
 	 * @since   0.1.0
 	 */
 	public function load_localisation() {
-		load_plugin_textdomain( 'wp-plugin-template', false, dirname( plugin_basename( $this->file ) ) . '/lang/' );
+		load_plugin_textdomain( 'wp-plugin-template', false, $this->dir . '/lang/' );
 	} // End load_localisation ()
 
 	/**
@@ -258,7 +258,7 @@ class WP_Plugin_Template {
 		$locale = apply_filters( 'wp_plugin_template_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, false, dirname( plugin_basename( $this->file ) ) . '/lang/' );
+		load_plugin_textdomain( $domain, false, $this->dir . '/lang/' );
 	} // End load_plugin_textdomain ()
 
 	/**
@@ -275,7 +275,7 @@ class WP_Plugin_Template {
 	 * @static
 	 */
 	public static function instance( $file = '', $version = '0.1.0' ) {
-		if ( is_null( self::$_instance ) ) {
+		if ( null === self::$_instance ) {
 			self::$_instance = new self( $file, $version );
 		}
 

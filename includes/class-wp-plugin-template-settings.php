@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	die;
 }
 
 /**
@@ -411,13 +411,13 @@ class WP_Plugin_Template_Settings {
 		if ( is_array( $this->settings ) && 1 < count( $this->settings ) ) {
 			$html .= '<h2 class="nav-tab-wrapper">' . "\n";
 
-			$c = 0;
+			$count = 0;
 			foreach ( $this->settings as $section => $data ) {
 
 				// Set tab class.
 				$class = 'nav-tab';
 				if ( ! isset( $_GET['tab'] ) ) { //phpcs:ignore
-					if ( 0 === $c ) {
+					if ( 0 === $count ) {
 						$class .= ' nav-tab-active';
 					}
 				} else {
@@ -435,7 +435,7 @@ class WP_Plugin_Template_Settings {
 				// Output tab.
 				$html .= '<a href="' . $tab_link . '" class="' . esc_attr( $class ) . '">' . esc_html( $data['title'] ) . '</a>' . "\n";
 
-				++$c;
+				++$count;
 			}
 
 			$html .= '</h2>' . "\n";
@@ -471,7 +471,7 @@ class WP_Plugin_Template_Settings {
 	 * @return object WP_Plugin_Template_Settings instance
 	 */
 	public static function instance( $parent ) {
-		if ( is_null( self::$_instance ) ) {
+		if ( null === self::$_instance ) {
 			self::$_instance = new self( $parent );
 		}
 		return self::$_instance;

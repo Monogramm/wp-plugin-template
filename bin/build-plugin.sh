@@ -14,11 +14,11 @@ read NEWREPO
 
 DEFAULT_NAME="WP Plugin Template"
 DEFAULT_CLASS=${DEFAULT_NAME// /_}
-DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< $DEFAULT_CLASS)
+DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< "$DEFAULT_CLASS")
 DEFAULT_SLUG=${DEFAULT_TOKEN//_/-}
 
 CLASS=${NAME// /_}
-TOKEN=$( tr '[A-Z]' '[a-z]' <<< $CLASS)
+TOKEN=$( tr '[A-Z]' '[a-z]' <<< "$CLASS")
 SLUG=${TOKEN//_/-}
 
 git clone "https://github.com/Monogramm/$DEFAULT_SLUG.git" "$FOLDER/$SLUG"
@@ -51,7 +51,7 @@ mv "includes/lib/class-$DEFAULT_SLUG-admin-api.php" "includes/lib/class-$SLUG-ad
 
 mv "tests/$DEFAULT_CLASS.php" "tests/$CLASS.php"
 
-for f in README.md readme.txt 'uninstall.php' "$SLUG.php" admin/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "tests/$CLASS.php" '.env' '.travis.yml' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md'
+for f in README.md readme.txt 'uninstall.php' "$SLUG.php" admin/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "tests/$CLASS.php" '.env' '.travis.yml' '.phpcs.xml.dist' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md'
 do
 	cp "$f" "$f.tmp"
 	sed "s/$DEFAULT_NAME/$NAME/g" "$f.tmp" > "$f"

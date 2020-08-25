@@ -76,7 +76,6 @@ You can run the script just like you would run any shell script - it does not ta
 
 This template provides a shell script for easy management of your plugin.
 
-
 ```shell
 ./manage.sh
 ```
@@ -124,7 +123,7 @@ See respective codex pages for `location` option defined below:
 
 Using the [Settings API](https://github.com/Monogramm/wp-plugin-template/blob/master/includes/class-wp-plugin-template-settings.php) and the wrapper function from the main plugin class you can easily store options from the WP admin like text boxes, radio options, dropdown, etc. You can call the values by using `id` that you have set under the `settings_fields` function. For example you have the `id` - `text_field`, you can call its value by using `get_option('wp_plugin_template_text_field')`. Take note that by default, this plugin is using a prefix of `wp_plugin_template_` before the id that you will be calling, you can override that value by changing it under the `__construct` function `$this->base` variable;
 
-### What does this template give me?
+### What does this template offers
 
 This template includes the following features:
 

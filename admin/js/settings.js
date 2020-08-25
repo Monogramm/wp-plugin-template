@@ -40,9 +40,9 @@ jQuery( document ).ready(
 		var file_frame;
 
 		jQuery.fn.uploadMediaFile = function (button, preview_media) {
-			var button_id  = button.attr( 'id' );
-			var field_id   = button_id.replace( '_button', '' );
-			var preview_id = button_id.replace( '_button', '_preview' );
+			var buttonId  = button.attr( 'id' );
+			var fieldId   = buttonId.replace( '_button', '' );
+			var previewId = buttonId.replace( '_button', '_preview' );
 
 			// If the media frame already exists, reopen it.
 			if (file_frame) {
@@ -66,9 +66,9 @@ jQuery( document ).ready(
 				'select',
 				function () {
 					attachment = file_frame.state().get( 'selection' ).first().toJSON();
-					jQuery( "#" + field_id ).val( attachment.id );
+					jQuery( "#" + fieldId ).val( attachment.id );
 					if (preview_media) {
-						jQuery( "#" + preview_id ).attr( 'src', attachment.sizes.thumbnail.url );
+						jQuery( "#" + previewId ).attr( 'src', attachment.sizes.thumbnail.url );
 					}
 					file_frame = false;
 				}

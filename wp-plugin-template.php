@@ -18,7 +18,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	die;
 }
 
 // Load plugin class files.
@@ -39,7 +39,7 @@ require_once 'includes/lib/class-wp-plugin-template-taxonomy.php';
 function wp_plugin_template() {
 	$instance = WP_Plugin_Template::instance( __FILE__, '0.1.0' );
 
-	if ( is_null( $instance->settings ) ) {
+	if ( null === $instance->settings ) {
 		$instance->settings = WP_Plugin_Template_Settings::instance( $instance );
 	}
 

@@ -15,14 +15,14 @@ WP_VERSION=${5:-${WP_VERSION:-'latest'}}
 SKIP_DB_CREATE=${6:-'false'}
 
 TMPDIR=${TMPDIR:-/tmp}
-TMPDIR=$(echo "$TMPDIR" | sed -e "s/\/$//")
+TMPDIR=$(echo "${TMPDIR}" | sed -e "s/\/$//")
 WP_TESTS_DIR=${WP_TESTS_DIR:-"${TMPDIR}/wordpress-tests-lib"}
 WP_CORE_DIR=${WP_CORE_DIR:-"${TMPDIR}/wordpress/"}
 
 download() {
-    if [ `which curl` ]; then
+    if [ $(which curl) ]; then
         curl -s "$1" > "$2";
-    elif [ `which wget` ]; then
+    elif [ $(which wget) ]; then
         wget -nv -O "$2" "$1"
     fi
 }
@@ -83,7 +83,7 @@ install_wp() {
 			else
 				# otherwise, scan the releases and get the most up to date minor version of the major release
 				local VERSION_ESCAPED=`echo "$WP_VERSION" | sed 's/\./\\\\./g'`
-				LATEST_VERSION=$(grep -o '"version":"'$VERSION_ESCAPED'[^"]*' $TMPDIR/wp-latest.json | sed 's/"version":"//' | head -1)
+				LATEST_VERSION=$(grep -o '"version":"'$VERSION_ESCAPED'[^"]*' "$TMPDIR/wp-latest.json" | sed 's/"version":"//' | head -1)
 			fi
 			if [[ -z "$LATEST_VERSION" ]]; then
 				local ARCHIVE_NAME="wordpress-$WP_VERSION"

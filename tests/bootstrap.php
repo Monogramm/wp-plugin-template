@@ -24,7 +24,7 @@ function _manually_load_plugin() {
 	if ( ! $_tests_plugin ) {
 		$_tests_plugin = dirname( '..' );
 	}
-	require dirname( __FILE__ ) . '/../' . $_tests_plugin . '.php';
+	require __DIR__ . '/../' . $_tests_plugin . '.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 

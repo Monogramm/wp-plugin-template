@@ -42,7 +42,13 @@ RUN set -ex; \
         php7-xmlreader \
         php7-xmlwriter \
         php7-zip \
-    ;
+    ; \
+    apk add --no-cache \
+        nodejs \
+        npm \
+    ; \
+    npm install grunt; \
+    npm install -g grunt-cli;
 
 COPY docker-test.sh /docker-test.sh
 

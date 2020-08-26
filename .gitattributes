@@ -11,6 +11,7 @@
 *.sh text eol=lf
 *.yml text eol=lf
 Dockerfile text eol=lf
+*.js text eol=lf
 
 # Ensure those won't be messed up with
 *.jpg binary

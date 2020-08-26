@@ -7,6 +7,8 @@
   "homepage": "https://github.com/Monogramm/wp-plugin-template",
   "main": "Gruntfile.js",
   "devDependencies": {
+    "@wordpress/eslint-plugin": "^7.1.0",
+    "eslint": "^7.7.0",
     "gitmoji-changelog": "^2.1.0",
     "grunt": "^1.0.3",
     "grunt-contrib-cssmin": "~0.9.0",
@@ -22,6 +24,7 @@
   "scripts": {
     "lint-md": "remark .",
     "gitmoji-changelog": "gitmoji-changelog --preset generic && remark CHANGELOG.md -o",
+    "lint-js": "eslint .",
     "start": "grunt default",
     "i18n": "grunt i18n"
   },

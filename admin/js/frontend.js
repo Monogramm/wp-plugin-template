@@ -1,11 +1,12 @@
 /**
- * Plugin Template frontend js.
+ * WP Plugin Template frontend js.
  *
- *  @package WP Plugin Template/JS
+ * @package
  */
 
-jQuery( document ).ready(
-	function ( e ) {
-
+/* global jQuery */
+jQuery( document ).ready( function ( e ) {
+	if ( e ) {
+		// Do something
 	}
-);
+} );

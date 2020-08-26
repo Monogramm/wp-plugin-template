@@ -57,5 +57,15 @@ echo "Trigger PHP Code Sniffer (without warnings)..."
 
 echo " "
 echo "========"
+echo "Install node deps..."
+npm install
+
+echo " "
+echo "========"
+echo "Trigger ESLint.."
+eslint .
+
+echo " "
+echo "========"
 echo "Tests successful. Check logs for details."
 return 0

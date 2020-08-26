@@ -139,7 +139,7 @@ This template includes the following features:
 -   A complete and versatile settings class like you see [here](http://www.hughlashbrooke.com/complete-versatile-options-page-class-wordpress-plugin/)
 -   A .pot generation / update to make localisation easier
 -   Full text of the AGPLv3 license
--   Automated tests and code quality monitoring using PHPUnit, PHPCS
+-   Automated tests and code quality monitoring using PHPUnit, PHPCS and ESLint
 -   GitHub and GitLab templates for Issues and Pull Requests
 -   Docker dev and test environments for easy integration into any CI (with current integration to Travis CI)
 -   Plugin install and uninstall hooks

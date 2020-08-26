@@ -37,21 +37,21 @@ jQuery( document ).ready(
 
 		/***** Uploading images *****/
 
-		var file_frame;
+		var fileFrame;
 
-		jQuery.fn.uploadMediaFile = function (button, preview_media) {
+		jQuery.fn.uploadMediaFile = function (button, previewMedia) {
 			var buttonId  = button.attr( "id" );
 			var fieldId   = buttonId.replace( "_button", "" );
 			var previewId = buttonId.replace( "_button", "_preview" );
 
 			// If the media frame already exists, reopen it.
-			if (file_frame) {
-				file_frame.open();
+			if (fileFrame) {
+				fileFrame.open();
 				return;
 			}
 
 			// Create the media frame.
-			file_frame = wp.media.frames.file_frame = wp.media(
+			fileFrame = wp.media.frames.fileFrame = wp.media(
 				{
 					title: jQuery( this ).data( "uploader_title" ),
 					button: {
@@ -62,20 +62,20 @@ jQuery( document ).ready(
 			);
 
 			// When an image is selected, run a callback.
-			file_frame.on(
+			fileFrame.on(
 				"select",
 				function () {
-					attachment = file_frame.state().get( "selection" ).first().toJSON();
+					var attachment = fileFrame.state().get( "selection" ).first().toJSON();
 					jQuery( "#" + fieldId ).val( attachment.id );
-					if (preview_media) {
+					if (previewMedia) {
 						jQuery( "#" + previewId ).attr( "src", attachment.sizes.thumbnail.url );
 					}
-					file_frame = false;
+					fileFrame = false;
 				}
 			);
 
 			// Finally, open the modal.
-			file_frame.open();
+			fileFrame.open();
 		}
 
 		jQuery( ".image_upload_button" ).click(

@@ -63,7 +63,7 @@ npm install
 echo " "
 echo "========"
 echo "Trigger ESLint.."
-eslint .
+npx eslint .
 
 echo " "
 echo "========"

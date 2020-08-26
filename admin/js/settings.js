@@ -9,25 +9,25 @@ jQuery( document ).ready(
 
 		/***** Colour picker *****/
 
-		$( '.colorpicker' ).hide();
-		$( '.colorpicker' ).each(
+		$( ".colorpicker" ).hide();
+		$( ".colorpicker" ).each(
 			function () {
-				$( this ).farbtastic( $( this ).closest( '.color-picker' ).find( '.color' ) );
+				$( this ).farbtastic( $( this ).closest( ".color-picker" ).find( ".color" ) );
 			}
 		);
 
-		$( '.color' ).click(
+		$( ".color" ).click(
 			function () {
-				$( this ).closest( '.color-picker' ).find( '.colorpicker' ).fadeIn();
+				$( this ).closest( ".color-picker" ).find( ".colorpicker" ).fadeIn();
 			}
 		);
 
 		$( document ).mousedown(
 			function () {
-				$( '.colorpicker' ).each(
+				$( ".colorpicker" ).each(
 					function () {
-						var display = $( this ).css( 'display' );
-						if (display == 'block') {
+						var display = $( this ).css( "display" );
+						if (display == "block") {
 							$( this ).fadeOut();
 						}
 					}
@@ -40,9 +40,9 @@ jQuery( document ).ready(
 		var file_frame;
 
 		jQuery.fn.uploadMediaFile = function (button, preview_media) {
-			var buttonId  = button.attr( 'id' );
-			var fieldId   = buttonId.replace( '_button', '' );
-			var previewId = buttonId.replace( '_button', '_preview' );
+			var buttonId  = button.attr( "id" );
+			var fieldId   = buttonId.replace( "_button", "" );
+			var previewId = buttonId.replace( "_button", "_preview" );
 
 			// If the media frame already exists, reopen it.
 			if (file_frame) {
@@ -53,9 +53,9 @@ jQuery( document ).ready(
 			// Create the media frame.
 			file_frame = wp.media.frames.file_frame = wp.media(
 				{
-					title: jQuery( this ).data( 'uploader_title' ),
+					title: jQuery( this ).data( "uploader_title" ),
 					button: {
-						text: jQuery( this ).data( 'uploader_button_text' ),
+						text: jQuery( this ).data( "uploader_button_text" ),
 					},
 					multiple: false
 				}
@@ -63,12 +63,12 @@ jQuery( document ).ready(
 
 			// When an image is selected, run a callback.
 			file_frame.on(
-				'select',
+				"select",
 				function () {
-					attachment = file_frame.state().get( 'selection' ).first().toJSON();
+					attachment = file_frame.state().get( "selection" ).first().toJSON();
 					jQuery( "#" + fieldId ).val( attachment.id );
 					if (preview_media) {
-						jQuery( "#" + previewId ).attr( 'src', attachment.sizes.thumbnail.url );
+						jQuery( "#" + previewId ).attr( "src", attachment.sizes.thumbnail.url );
 					}
 					file_frame = false;
 				}
@@ -78,16 +78,16 @@ jQuery( document ).ready(
 			file_frame.open();
 		}
 
-		jQuery( '.image_upload_button' ).click(
+		jQuery( ".image_upload_button" ).click(
 			function () {
 				jQuery.fn.uploadMediaFile( jQuery( this ), true );
 			}
 		);
 
-		jQuery( '.image_delete_button' ).click(
+		jQuery( ".image_delete_button" ).click(
 			function () {
-				jQuery( this ).closest( 'td' ).find( '.image_data_field' ).val( '' );
-				jQuery( this ).closest( 'td' ).find( '.image_preview' ).remove();
+				jQuery( this ).closest( "td" ).find( ".image_data_field" ).val( "" );
+				jQuery( this ).closest( "td" ).find( ".image_preview" ).remove();
 				return false;
 			}
 		);

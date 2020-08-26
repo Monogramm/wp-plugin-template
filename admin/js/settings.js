@@ -27,7 +27,7 @@ jQuery( document ).ready(
 				$( ".colorpicker" ).each(
 					function () {
 						var display = $( this ).css( "display" );
-						if (display == "block") {
+						if (display === "block") {
 							$( this ).fadeOut();
 						}
 					}
@@ -76,7 +76,7 @@ jQuery( document ).ready(
 
 			// Finally, open the modal.
 			fileFrame.open();
-		}
+		};
 
 		jQuery( ".image_upload_button" ).click(
 			function () {

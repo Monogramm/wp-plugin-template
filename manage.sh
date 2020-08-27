@@ -63,6 +63,9 @@ usage() {
         stop                Stop dev / test env
         logs                Follow logs of dev / test env
         reset               Reset all data of dev / test env
+        sut                 Execute commands in test container
+        phpcbf              Execute PHP Code Beautifier and Fixer in test container
+        wp                  Execute WP-CLI in WordPress container
         i18n                Update i18n locales
         build               Build and clean source code
         prepare-release     Prepare app release
@@ -80,6 +83,9 @@ case "${1}" in
     logs) docker-compose logs -f ${@:2};;
     reset) docker-compose down
     rm -rf /srv/wordpress;;
+    sut) docker-compose run -T sut ${@:2};;
+    phpcbf) docker-compose run -T sut ./vendor/bin/phpcbf;;
+    wp) docker-compose exec -T --user www-data wordpress wp ${@:2};;
     i18n) npm install
     npm run i18n;;
     build) build;;

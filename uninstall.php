@@ -35,3 +35,6 @@ if ( isset( $wp_plugin_template_tables ) && is_array( $wp_plugin_template_tables
 	}
 }
 
+// Remove the plugin version number.
+$prefix = 'WP_Plugin_Template';
+delete_option( $prefix . '_version' );

@@ -31,13 +31,22 @@ class WP_Plugin_Template {
 	public $admin = null;
 
 	/**
-	 * Settings class object
+	 * Settings class object.
 	 *
 	 * @var     object
 	 * @access  public
 	 * @since   0.1.0
 	 */
 	public $settings = null;
+
+	/**
+	 * ShortCodes class object.
+	 *
+	 * @var     object
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $shortcodes = null;
 
 	/**
 	 * The version number.
@@ -254,7 +263,7 @@ class WP_Plugin_Template {
 	public function load_plugin_textdomain() {
 		$domain = 'wp-plugin-template';
 
-		$locale = apply_filters( 'wp_plugin_template_locale', get_locale(), $domain );
+		$locale = apply_filters( 'plugin_locale', get_locale(), $domain ); //phpcs:ignore
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
 		load_plugin_textdomain( $domain, false, $this->dir . '/lang/' );
@@ -320,6 +329,17 @@ class WP_Plugin_Template {
 	private function _log_version_number() { //phpcs:ignore
 		update_option( $this->_token . '_version', $this->_version );
 	} // End _log_version_number ()
+
+	/**
+	 * Uninstallation. Runs on uninstall.
+	 *
+	 * @access  public
+	 * @return  void
+	 * @since   0.1.0
+	 */
+	public function uninstall() {
+		$this->_delete_version_number();
+	} // End install ()
 
 	/**
 	 * Remove the plugin version number.

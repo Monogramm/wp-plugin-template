@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Load plugin class files.
 require_once 'includes/class-wp-plugin-template.php';
 require_once 'includes/class-wp-plugin-template-settings.php';
+require_once 'includes/class-wp-plugin-template-shortcodes.php';
 
 // Load plugin libraries.
 require_once 'includes/lib/class-wp-plugin-template-admin-api.php';
@@ -41,6 +42,10 @@ function wp_plugin_template() {
 
 	if ( null === $instance->settings ) {
 		$instance->settings = WP_Plugin_Template_Settings::instance( $instance );
+	}
+
+	if ( null === $instance->shortcodes ) {
+		$instance->shortcodes = WP_Plugin_Template_ShortCodes::instance( $instance );
 	}
 
 	return $instance;

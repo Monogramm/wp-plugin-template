@@ -47,6 +47,21 @@ See [Taiga.io](https://tree.taiga.io/project/monogrammbot-monogrammwp-plugin-tem
 
 ## :construction: Install
 
+### Docker
+
+You can use the docker test environment to install this plugin. Check tests section for details.
+
+### Git clone
+
+If you already have a WordPress instance, you can clone this plugin directly:
+
+```
+cd wp-content/plugins/
+git clone https://github.com/Monogramm/wp-plugin-template.git
+```
+
+### ZIP Archive
+
 You can build the WordPress plugin zip file using the following command:
 
 ```sh
@@ -54,8 +69,6 @@ You can build the WordPress plugin zip file using the following command:
 ```
 
 You can then manually install the plugin on your WordPress.
-
-Alternatively, you can use the docker test environment. Check tests section for details.
 
 ## :rocket: Usage
 
@@ -92,7 +105,7 @@ Using the [post type API](https://github.com/hlashbrooke/wp-plugin-template/blob
 
 _Note that the `WP_Plugin_Template()` function name and the `wp-plugin-template` text domain will each be unique to your plugin after you have used the cloning script._
 
-This will register a new post type with all the standard settings. If you would like to modify the post type settings you can use the `{$post_type}_register_args` filter. See [the WordPress codex page](http://codex.wordpress.org/Function_Reference/register_post_type) for all available arguments.
+This will register a new post type with all the standard settings. If you would like to modify the post type settings you can use the `{$post_type}_register_args` filter. See [the WordPress codex page](https://developer.wordpress.org/reference/functions/register_post_type/) for all available arguments.
 
 #### Registering a new taxonomy
 
@@ -102,7 +115,7 @@ Using the [taxonomy API](https://github.com/hlashbrooke/wp-plugin-template/blob/
 
 _Note that the `WP_Plugin_Template()` function name and the `wp-plugin-template` text domain will each be unique to your plugin after you have used the cloning script._
 
-This will register a new taxonomy with all the standard settings. If you would like to modify the taxonomy settings you can use the `{$taxonomy}_register_args` filter. See [the WordPress codex page](http://codex.wordpress.org/Function_Reference/register_taxonomy) for all available arguments.
+This will register a new taxonomy with all the standard settings. If you would like to modify the taxonomy settings you can use the `{$taxonomy}_register_args` filter. See [the WordPress codex page](https://developer.wordpress.org/reference/functions/register_taxonomy/) for all available arguments.
 
 #### Defining your Settings Page Location
 
@@ -143,6 +156,7 @@ This template includes the following features:
 -   GitHub and GitLab templates for Issues and Pull Requests
 -   Docker dev and test environments for easy integration into any CI (with current integration to Travis CI)
 -   Plugin install and uninstall hooks
+-   Easy class to manage shortcodes
 
 See the [changelog](https://github.com/Monogramm/wp-plugin-template/blob/master/changelog.txt) for a complete list of changes as the template develops.
 

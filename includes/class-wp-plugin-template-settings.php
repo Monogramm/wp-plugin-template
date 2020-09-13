@@ -58,7 +58,7 @@ class WP_Plugin_Template_Settings {
 	public function __construct( $parent ) {
 		$this->parent = $parent;
 
-		$this->base = 'wp_plugin_template_';
+		$this->base = 'wppt_';
 
 		// Initialise settings.
 		add_action( 'init', array( $this, 'init_settings' ), 11 );

@@ -13,28 +13,32 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
 
-/**
- * Making WPDB as global
- * to access database information.
- */
-global $wpdb;
-
-/**
- * Name of tables to be dropped.
- *
- * @var array $wp_plugin_template_tables
- */
-$wp_plugin_template_tables = array(
-	// 'wp_plugin_template'
-);
-
-if ( isset( $wp_plugin_template_tables ) && is_array( $wp_plugin_template_tables ) ) {
-	// drop the table(s) from the database.
-	foreach ( $wp_plugin_template_tables as $wp_plugin_template_table ) {
-		$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $wp_plugin_template_table ) );
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+	die;
 }
 
-// Remove the plugin version number.
-$wp_plugin_template_prefix = 'WP_Plugin_Template';
-delete_option( $wp_plugin_template_prefix . '_version' );
+// Load plugin class files.
+require_once 'includes/class-wp-plugin-template.php';
+require_once 'includes/class-wp-plugin-template-settings.php';
+
+// Load plugin libraries.
+require_once 'includes/lib/class-wp-plugin-template-admin-api.php';
+require_once 'includes/lib/class-wp-plugin-template-post-type.php';
+require_once 'includes/lib/class-wp-plugin-template-taxonomy.php';
+
+/**
+ * Returns the main instance of WP_Plugin_Template to prevent the need to use globals.
+ *
+ * @since  0.1.0
+ * @return object WP_Plugin_Template
+ */
+function wp_plugin_template() {
+	$instance = WP_Plugin_Template::instance( __FILE__, '0.1.0' );
+
+	return $instance;
+}
+
+$wp_plugin_template = wp_plugin_template();
+
+$wp_plugin_template->uninstall();
+

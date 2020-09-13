@@ -10,19 +10,6 @@ log() {
     echo "[${0}] [$(date +%Y-%m-%dT%H:%M:%S)] ${1}"
 }
 
-build() {
-    # Node install and CSS / JS minifier
-    npm install
-    npm run start
-
-    # Docker container(s) build
-    docker-compose build
-
-    # PHP Composer install and code fixer
-    #composer install
-    #./vendor/bin/phpcbf
-}
-
 prepare_release() {
     NEW_VERSION=${1}
     if [ -z "${NEW_VERSION}" ] ; then
@@ -59,6 +46,13 @@ usage() {
     echo "usage: ./manage.sh COMMAND [ARGUMENTS]
 
     Commands:
+        local-install       Install local env for WP tests and lint
+        local-test          Execute tests in local env
+        local-lint          Execute lint in local env
+        local-i18n          Update i18n locales
+        local-clean         Minify and clean source code
+        local-prep-release  Prepare app release
+
         start               Start dev / test env (docker)
         stop                Stop dev / test env
         logs                Follow logs of dev / test env
@@ -66,9 +60,6 @@ usage() {
         sut                 Execute commands in test container
         phpcbf              Execute PHP Code Beautifier and Fixer in test container
         wp                  Execute WP-CLI in WordPress container
-        i18n                Update i18n locales
-        build               Build and clean source code
-        prepare-release     Prepare app release
     "
 }
 
@@ -76,6 +67,29 @@ usage() {
 # Runtime
 
 case "${1}" in
+    # Local env
+    local-install)
+    composer install
+    npm install
+    ./bin/install-wp-tests.sh ${@:2};;
+
+    local-test)
+    ./vendor/bin/phpunit
+    WP_MULTISITE=1 ./vendor/bin/phpunit;;
+
+    local-lint)
+    ./vendor/bin/phpcs --warning-severity=0
+    npx eslint .;;
+
+    local-i18n) npm run i18n;;
+    local-clean)
+    npm run start
+    ./vendor/bin/phpcbf;;
+
+    local-prep-release)
+    npm run start
+    prepare_release ${@:2};;
+
     # DEV env
     start) docker-compose up -d ${@:2}
     chown 'www-data:www-data' -R '/srv/wordpress/html/wp-content';;
@@ -86,11 +100,6 @@ case "${1}" in
     sut) docker-compose run -T sut ${@:2};;
     phpcbf) docker-compose run -T sut ./vendor/bin/phpcbf;;
     wp) docker-compose exec -T --user www-data wordpress wp ${@:2};;
-    i18n) npm install
-    npm run i18n;;
-    build) build;;
-    prepare-release) build
-    prepare_release ${@:2};;
     # Help
     *) usage;;
 esac

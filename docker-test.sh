@@ -5,7 +5,7 @@ set -e
 ################################################################################
 
 wait_for_db() {
-	if [ "$WAIT_FOR_DB" == "false" ]; then
+	if [ "$WAIT_FOR_DB" = "false" ]; then
 		return 0
 	fi
 

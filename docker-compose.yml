@@ -1,16 +1,22 @@
-version: "2.2"
+version: "2.3"
+
+volumes:
+  wordpress_data:
+  wordpress_db:
 
 services:
   sut:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       wordpress:
         condition: service_started
       wordpressdb:
         condition: service_healthy
     volumes:
-      # To persist WP locally
-      - /srv/wordpress/html:/var/www/html
+      # To persist WP
+      - wordpress_data:/var/www/html
       # To mount local plugin into WP
       - .:/var/www/html/wp-content/plugins/${WP_PLUGIN}
       # To persist WP tests lib
@@ -35,16 +41,19 @@ services:
     image: monogramm/docker-wordpress:${WP_VERSION}-apache
     container_name: wordpress
     #restart: always
+    hostname: localhost
     depends_on:
       wordpressdb:
         condition: service_healthy
     links:
       - wordpressdb
+    expose:
+     - 80
     ports:
      - "8080:80"
     volumes:
-      # To persist WP locally
-      - /srv/wordpress/html:/var/www/html
+      # To persist WP
+      - wordpress_data:/var/www/html
       # To mount local plugin into WP
       - .:/var/www/html/wp-content/plugins/${WP_PLUGIN}
     environment:
@@ -91,7 +100,10 @@ services:
     #ports:
     #  - "3306:3306"
     volumes:
-      - /srv/wordpress/db:/var/lib/mysql
+      - wordpress_db:/var/lib/mysql
+      # If you want, you can sync time & timezone with host
+      #- /etc/localtime:/etc/localtime:ro
+      #- /etc/timezone:/etc/timezone:ro
     environment:
       - MYSQL_ROOT_PASSWORD=${WORDPRESS_DB_ROOT_PWD}
       - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
@@ -107,7 +119,8 @@ services:
       - 1025
     ports:
       - "1080:1080"
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
+    # If you want, you can sync time & timezone with host
+    #volumes:
+    #  - /etc/localtime:/etc/localtime:ro
+    #  - /etc/timezone:/etc/timezone:ro
 

@@ -1,6 +1,6 @@
-FROM composer:1.10.10 as builder-composer
+FROM composer:1.10 as builder-composer
 
-FROM alpine:3.12.0 as builder
+FROM alpine:3.12 as builder
 
 COPY bin/install-wp-tests.sh /install-wp-tests.sh
 COPY bin/generate-plugin-zip.sh /generate-plugin-zip.sh
@@ -16,6 +16,7 @@ RUN set -ex; \
     ; \
     apk add --update \
         bash \
+        curl \
         subversion \
     ; \
     apk add --no-cache \

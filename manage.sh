@@ -7,7 +7,7 @@ set -e
 # Functions
 
 log() {
-    echo "[${0}] [$(date +%Y-%m-%dT%H:%M:%S)] ${1}"
+    echo "[${0}] [$(date +%Y-%m-%dT%H:%M:%S)] $*"
 }
 
 prepare_release() {
@@ -55,6 +55,7 @@ usage() {
 
         start               Start dev / test env (docker)
         stop                Stop dev / test env
+        test                Start test env and verify plugin install correctly
         logs                Follow logs of dev / test env
         reset               Reset all data of dev / test env
         sut                 Execute commands in test container
@@ -91,15 +92,33 @@ case "${1}" in
     prepare_release ${@:2};;
 
     # DEV env
-    start) docker-compose up -d ${@:2}
+    start) docker-compose up -d "${@:2}"
     chown 'www-data:www-data' -R '/srv/wordpress/html/wp-content';;
-    stop) docker-compose down ${@:2};;
-    logs) docker-compose logs -f ${@:2};;
+    stop) docker-compose down "${@:2}";;
+    test) set -e
+    docker-compose build
+    docker-compose down -v
+    docker-compose up -d
+    docker-compose ps
+    docker-compose logs -f sut
+    docker-compose ps
+    docker-compose logs wordpress
+    docker-compose ps sut | grep -q 'Exit 0'
+    docker-compose exec -T --user www-data wordpress wp core install --url="http://localhost" --title="WordPress-CI" --admin_user=admin --admin_password=password --admin_email=admin@yopmail.com
+    docker-compose exec -T --user www-data wordpress wp plugin activate wp-plugin-template
+    docker-compose down -v
+    set +e;;
+    logs) docker-compose logs -f "${@:2}";;
     reset) docker-compose down
     rm -rf /srv/wordpress;;
-    sut) docker-compose run -T sut ${@:2};;
+    sut) docker-compose run -T sut "${@:2}";;
     phpcbf) docker-compose run -T sut ./vendor/bin/phpcbf;;
-    wp) docker-compose exec -T --user www-data wordpress wp ${@:2};;
+    wp) docker-compose exec -T --user www-data wordpress wp "${@:2}";;
+    i18n) npm install
+    npm run i18n;;
+    build) build;;
+    prepare-release) build
+    prepare_release "${@:2}";;
     # Help
     *) usage;;
 esac

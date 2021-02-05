@@ -21,7 +21,7 @@ jobs:
       - name: Execute CI tests
         id: docker_build
         run: |
-          export WP_VERSION=${{ matrix.version }
+          export WP_VERSION=${{ matrix.version }}
           ./manage test
 
       - name: Display docker images

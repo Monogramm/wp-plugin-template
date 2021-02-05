@@ -1,7 +1,7 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
 [![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://wordpress.org/plugins/wp-plugin-template/)
 [![gitmoji-changelog](https://img.shields.io/badge/Changelog-gitmoji-blue.svg)](https://github.com/frinyvonnick/gitmoji-changelog)
-[![Build Status](https://travis-ci.org/Monogramm/wp-plugin-template.svg)](https://travis-ci.org/Monogramm/wp-plugin-template)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Monogramm/wp-plugin-template/Docker%20Image%20CI)](https://github.com/Monogramm/wp-plugin-template/actions)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b1db1c7d98f949e2897ac0f41fbbfb30)](https://www.codacy.com/gh/Monogramm/wp-plugin-template?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Monogramm/wp-plugin-template&amp;utm_campaign=Badge_Grade)
 [![GitHub stars](https://img.shields.io/github/stars/Monogramm/wp-plugin-template?style=social)](https://github.com/Monogramm/wp-plugin-template)
 

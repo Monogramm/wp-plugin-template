@@ -22,7 +22,7 @@ jobs:
         id: docker_build
         run: |
           export WP_VERSION=${{ matrix.version }}
-          ./manage test
+          ./manage.sh test
 
       - name: Display docker images
         run: docker images

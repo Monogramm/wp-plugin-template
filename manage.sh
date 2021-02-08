@@ -72,7 +72,7 @@ case "${1}" in
     local-install)
     composer install
     npm install
-    ./bin/install-wp-tests.sh ${@:2};;
+    ./bin/install-wp-tests.sh "${@:2}";;
 
     local-test)
     ./vendor/bin/phpunit
@@ -89,7 +89,7 @@ case "${1}" in
 
     local-prep-release)
     npm run start
-    prepare_release ${@:2};;
+    prepare_release "${@:2}";;
 
     # DEV env
     start) docker-compose up -d "${@:2}"

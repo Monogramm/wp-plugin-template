@@ -7,7 +7,7 @@
  * Author: Monogramm
  * Author URI: http://www.monogramm.io/
  * Requires at least: 5.2
- * Tested up to: 5.5
+ * Tested up to: 5.6
  *
  * Text Domain: wp-plugin-template
  * Domain Path: /lang/

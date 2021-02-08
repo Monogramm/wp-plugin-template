@@ -3,9 +3,11 @@ name: Docker Image CI
 
 on:
   push:
-    branches:
-      - master
-      - develop
+    paths-ignore:
+      - 'docs/**'
+    #branches:
+    #  - master
+    #  - develop
 
 jobs:
   build:

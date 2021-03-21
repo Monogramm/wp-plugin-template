@@ -23,5 +23,6 @@ ENV WORDPRESS_DB_NAME=wordpressdb \
 	WORDPRESS_ADMIN_LOGIN=root \
 	WORDPRESS_ADMIN_PWD=wordpress
 
+# FIXME One of these crashes Gitpod if set
 #	TMPDIR=.gitpod/tmp \
 #	WP_TESTS_DIR=.gitpod/tmp/wordpress-tests-lib

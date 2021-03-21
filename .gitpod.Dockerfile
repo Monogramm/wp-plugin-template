@@ -15,13 +15,13 @@ COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 ENV WORDPRESS_DB_NAME=wordpressdb \
 	WORDPRESS_DB_USER=wordpress \
 	WORDPRESS_DB_PWD=wordpress \
-	WORDPRESS_DB_HOST=localhost:3306
+	WORDPRESS_DB_HOST=localhost:3306 \
+	WP_CORE_DIR=.gitpod/www \
+	NGINX_DOCROOT_IN_REPO=.gitpod/www
 
 #	TMPDIR=.gitpod/tmp \
 #	WP_TESTS_DIR=.gitpod/tmp/wordpress-tests-lib \
-#	WP_CORE_DIR=.gitpod/www \
 #	WORDPRESS_ADMIN_LOGIN=root \
 #	WORDPRESS_ADMIN_PWD=wordpress \
 #	WP_PLUGIN=wp-plugin-template \
-#	NGINX_DOCROOT_IN_REPO=.gitpod/www \
 #	PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN}

@@ -10,6 +10,13 @@ RUN set -ex; \
     sudo mkdir -p /var/log/nginx; \
     sudo chown gitpod:gitpod /var/log/nginx
 
+# Install php-fpm
+RUN set -ex; \
+    apt-get update; \
+    apt-get install -y php-fpm php-xdebug; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 
 ENV WORDPRESS_DB_NAME=wordpressdb \

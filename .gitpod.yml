@@ -26,15 +26,15 @@ tasks:
       git config --global user.signingkey ${GNUGPG_KEY}
     command: cd $GITPOD_REPO_ROOT
 
-  - init: >
-      export WP_VERSION=5.5 &&
-      ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PWD}
-    name: tests
-    command: ./manage.sh local-test
+  #- init: >
+  #    export WP_VERSION=5.5 &&
+  #    ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PWD}
+  #  name: tests
+  #  command: ./manage.sh local-test
 
-  - before: go get github.com/mailhog/MailHog
-    name: mailhog
-    command: MailHog
+  #- before: go get github.com/mailhog/MailHog
+  #  name: mailhog
+  #  command: MailHog
 
   #- name: Nginx
   #  command: >

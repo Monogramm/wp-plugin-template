@@ -32,9 +32,9 @@ tasks:
   #  name: tests
   #  command: ./manage.sh local-test
 
-  #- before: go get github.com/mailhog/MailHog
-  #  name: mailhog
-  #  command: MailHog
+  - before: go get github.com/mailhog/MailHog
+    name: mailhog
+    command: MailHog
 
   #- name: Nginx
   #  command: >

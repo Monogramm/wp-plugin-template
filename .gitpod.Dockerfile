@@ -19,8 +19,8 @@ FROM gitpod/workspace-mysql:latest
 #	PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN} \
 #	NGINX_DOCROOT_IN_REPO=.gitpod/www
 
-#RUN set -ex; \
-#    sudo mkdir -p /var/log/nginx; \
-#    sudo chown gitpod:gitpod /var/log/nginx
+RUN set -ex; \
+    sudo mkdir -p /var/log/nginx; \
+    sudo chown gitpod:gitpod /var/log/nginx
 
-#COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
+COPY .gitpod/nginx.conf /etc/nginx/nginx.conf

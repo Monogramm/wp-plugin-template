@@ -3,8 +3,11 @@ image:
 
 ports:
   # nginx wordpress
-  #- port: 8080
-  #  onOpen: open-preview
+  - port: 8080
+    onOpen: open-preview
+  # mysql
+  - port: 3306
+    onOpen: ignore
   # mailhog web interface
   - port: 8025
     onOpen: notify

@@ -150,13 +150,21 @@ install_db() {
 			EXTRA=" --host=$DB_HOSTNAME --port=$DB_SOCK_OR_PORT --protocol=tcp"
 		elif ! [ -z "$DB_SOCK_OR_PORT" ] ; then
 			EXTRA=" --socket=$DB_SOCK_OR_PORT"
-		elif ! [ -z "$DB_HOSTNAME" ] ; then
+		elif ! [ "$DB_HOSTNAME" = 'localhost' ] ; then
 			EXTRA=" --host=$DB_HOSTNAME --protocol=tcp"
 		fi
 	fi
 
-	echo 'create database...'
-	mysqladmin create "$DB_NAME" --user="$DB_USER" --password="$DB_PASS" $EXTRA
+	if ! [ -z "$EXTRA" ] ; then
+		echo 'create database...'
+		mysqladmin create "$DB_NAME" --user="$DB_USER" --password="$DB_PASS" $EXTRA
+	else
+		echo 'create database locally'
+		mysql -e "CREATE DATABASE ${DB_NAME};"
+		mysql -e "CREATE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}';"
+		mysql -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';"
+		mysql -e "FLUSH PRIVILEGES;"
+	fi
 }
 
 ################################################################################

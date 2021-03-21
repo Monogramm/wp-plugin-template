@@ -61,8 +61,10 @@ set -e
 install_wp() {
 
 	if [ -d "$WP_CORE_DIR" ]; then
+		echo 'wordpress core dir already exists'
 		return;
 	fi
+	echo 'installing wordpress...'
 
 	mkdir -p "$WP_CORE_DIR"
 
@@ -101,6 +103,8 @@ install_wp() {
 }
 
 install_test_suite() {
+	echo 'installing test suite...'
+
 	# portable in-place argument for both GNU sed and Mac OSX sed
 	if [[ $(uname -s) == 'Darwin' ]]; then
 		local ioption='-i.bak'
@@ -151,7 +155,7 @@ install_db() {
 		fi
 	fi
 
-	# create database
+	echo 'create database...'
 	mysqladmin create "$DB_NAME" --user="$DB_USER" --password="$DB_PASS" $EXTRA
 }
 

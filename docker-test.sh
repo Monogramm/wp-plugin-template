@@ -25,7 +25,7 @@ sleep 15
 
 if [ ! -d "$PROJECT_DIR" ]; then
 	echo "No project to test found at '$PROJECT_DIR'!"
-    exit 1
+	exit 1
 fi
 
 cd "$PROJECT_DIR"
@@ -62,7 +62,7 @@ npm install
 
 echo " "
 echo "========"
-echo "Trigger ESLint.."
+echo "Trigger ESLint..."
 npx eslint .
 
 echo " "

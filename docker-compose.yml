@@ -23,7 +23,6 @@ services:
       #- /srv/wordpress/tests-lib:/tmp/wordpress-tests-lib
     environment:
       - WAIT_FOR_DB=true
-      - DB_HOST=${WORDPRESS_ADMIN_LOGIN}
       - PROJECT_DIR=/var/www/html/wp-content/plugins/${WP_PLUGIN}
       # WordPress tests config
       - DB_NAME=${WORDPRESS_DB_NAME}

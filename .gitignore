@@ -35,3 +35,7 @@ wp-cli.local.yml
 # ignore miscellaneous files
 .DS_Store
 Thumbs.db
+
+# ignore miscellaneous files
+.gitpod/www
+.gitpod/tmp

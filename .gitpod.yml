@@ -43,10 +43,11 @@ tasks:
     openMode: split-right
     command: MailHog
 
-  - name: Nginx
+  - name: Nginx + PHP-FPM
     command: >
       nginx &&
-      multitail /var/log/nginx/access.log -I /var/log/nginx/error.log
+      /usr/sbin/php-fpm7.4 --fpm-config php-fpm.conf &&
+      multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
 
 #vscode:
 #  extensions:

@@ -6,16 +6,17 @@ FROM gitpod/workspace-mysql:latest
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-RUN set -ex; \
-    sudo mkdir -p /var/log/nginx; \
-    sudo chown gitpod:gitpod /var/log/nginx
+USER root
 
-# Install php-fpm
 RUN set -ex; \
-    sudo apt-get update; \
-    sudo apt-get install -y php7.4-fpm php7.4-xdebug
+    mkdir -p /var/log/nginx /var/log/php; \
+    chown gitpod:gitpod /var/log/nginx /var/log/php; \
+    apt-get update; \
+    apt-get install -y php7.4-fpm php7.4-xdebug; \
+    chown -R gitpod:gitpod /etc/php
 
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
+COPY php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 
 ENV WORDPRESS_DB_NAME=wordpressdb \
     WORDPRESS_DB_USER=wordpress \
@@ -31,3 +32,5 @@ ENV WORDPRESS_DB_NAME=wordpressdb \
 # FIXME One of these crashes Gitpod if set
 #	TMPDIR=.gitpod/tmp \
 #	WP_TESTS_DIR=.gitpod/tmp/wordpress-tests-lib
+
+USER gitpod

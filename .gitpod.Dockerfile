@@ -30,9 +30,7 @@ ENV WORDPRESS_DB_NAME=wordpress \
     NGINX_DOCROOT_IN_REPO=.gitpod/www \
     APACHE_DOCROOT_IN_REPO=.gitpod/www \
     WP_PLUGIN=wp-plugin-template \
-    PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN} \
-    WORDPRESS_ADMIN_LOGIN=root \
-    WORDPRESS_ADMIN_PWD=wordpress
+    PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN}
 
 # FIXME One of these crashes Gitpod if set
 #	TMPDIR=.gitpod/tmp \

@@ -38,10 +38,12 @@ tasks:
 
   - init: >
       export WP_VERSION=5.5 &&
-      ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PASSWORD} &&
-      cp .gitpod/wp-config-docker.php .gitpod/www/wp-config.php
+      ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PASSWORD}
     name: tests
-    command: ./manage.sh local-test
+    command: >
+      ./manage.sh local-test &&
+      cp .gitpod/wp-config-docker.php .gitpod/www/wp-config.php &&
+      gp sync-done 'tests'
 
   - before: go get github.com/mailhog/MailHog
     name: mailhog
@@ -55,10 +57,9 @@ tasks:
   #    /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
   #    multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
 
-  # FIXME Mixed Content due HTTP content loaded over HTTPS
   - name: Apache + PHP-FPM
     command: >
-      gp await-port 3306 &&
+      gp sync-await 'tests' &&
       apachectl start &&
       /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
       tail -f /var/log/apache2/access.log /var/log/apache2/error.log /var/log/php/php-fpm.log

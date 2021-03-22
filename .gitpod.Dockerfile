@@ -12,10 +12,7 @@ RUN set -ex; \
 
 # Install php-fpm
 RUN set -ex; \
-    sudo apt-get update; \
-    sudo apt-get install -y php-fpm php-xdebug; \
-    sudo apt-get clean; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    sudo apt-get install -y php-fpm php-xdebug
 
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 

@@ -16,7 +16,7 @@ RUN set -ex; \
     chown -R gitpod:gitpod /etc/php
 
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
-COPY php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
+COPY .gitpod/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 
 ENV WORDPRESS_DB_NAME=wordpressdb \
     WORDPRESS_DB_USER=wordpress \

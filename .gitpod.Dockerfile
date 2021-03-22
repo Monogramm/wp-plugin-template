@@ -12,23 +12,23 @@ RUN set -ex; \
 
 # Install php-fpm
 RUN set -ex; \
-    apt-get update; \
-    apt-get install -y php-fpm php-xdebug; \
-    apt-get clean; \
+    sudo apt-get update; \
+    sudo apt-get install -y php-fpm php-xdebug; \
+    sudo apt-get clean; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 
 ENV WORDPRESS_DB_NAME=wordpressdb \
-	WORDPRESS_DB_USER=wordpress \
-	WORDPRESS_DB_PWD=wordpress \
-	WORDPRESS_DB_HOST=localhost:3306 \
-	WP_CORE_DIR=.gitpod/www \
-	NGINX_DOCROOT_IN_REPO=.gitpod/www \
-	WP_PLUGIN=wp-plugin-template \
-	PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN} \
-	WORDPRESS_ADMIN_LOGIN=root \
-	WORDPRESS_ADMIN_PWD=wordpress
+    WORDPRESS_DB_USER=wordpress \
+    WORDPRESS_DB_PWD=wordpress \
+    WORDPRESS_DB_HOST=localhost:3306 \
+    WP_CORE_DIR=.gitpod/www \
+    NGINX_DOCROOT_IN_REPO=.gitpod/www \
+    WP_PLUGIN=wp-plugin-template \
+    PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN} \
+    WORDPRESS_ADMIN_LOGIN=root \
+    WORDPRESS_ADMIN_PWD=wordpress
 
 # FIXME One of these crashes Gitpod if set
 #	TMPDIR=.gitpod/tmp \

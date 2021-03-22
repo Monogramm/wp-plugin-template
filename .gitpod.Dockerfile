@@ -9,8 +9,8 @@ FROM gitpod/workspace-mysql:latest
 USER root
 
 RUN set -ex; \
-    mkdir -p /var/log/nginx /var/log/php; \
-    chown gitpod:gitpod /var/log/nginx /var/log/php; \
+    mkdir -p /var/log/nginx /var/log/php /var/log/apache2/; \
+    chown gitpod:gitpod /var/log/nginx /var/log/php /var/log/apache2/; \
     apt-get update; \
     apt-get install -y php7.4-fpm php7.4-xdebug; \
     chown -R gitpod:gitpod /etc/php

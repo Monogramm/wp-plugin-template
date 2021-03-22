@@ -24,6 +24,7 @@ ENV WORDPRESS_DB_NAME=wordpressdb \
     WORDPRESS_DB_HOST=localhost:3306 \
     WP_CORE_DIR=.gitpod/www \
     NGINX_DOCROOT_IN_REPO=.gitpod/www \
+    APACHE_DOCROOT_IN_REPO=.gitpod/www \
     WP_PLUGIN=wp-plugin-template \
     PROJECT_DIR=.gitpod/www/wp-content/plugins/${WP_PLUGIN} \
     WORDPRESS_ADMIN_LOGIN=root \

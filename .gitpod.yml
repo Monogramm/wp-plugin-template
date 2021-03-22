@@ -2,6 +2,9 @@ image:
   file: .gitpod.Dockerfile
 
 ports:
+  # apache wordpress
+  #- port: 8001
+  #  onOpen: open-preview
   # nginx wordpress
   - port: 8080
     onOpen: open-preview
@@ -48,6 +51,12 @@ tasks:
       nginx &&
       /usr/sbin/php-fpm7.4 --fpm-config php-fpm.conf &&
       multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
+
+  #- name: Apache + PHP-FPM
+  #  command: >
+  #    apachectl start &&
+  #    /usr/sbin/php-fpm7.4 --fpm-config php-fpm.conf &&
+  #    multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
 
 #vscode:
 #  extensions:

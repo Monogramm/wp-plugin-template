@@ -27,7 +27,7 @@ services:
       # WordPress tests config
       - DB_NAME=${WORDPRESS_DB_NAME}
       - DB_USER=${WORDPRESS_DB_USER}
-      - DB_PASS=${WORDPRESS_DB_PWD}
+      - DB_PASS=${WORDPRESS_DB_PASSWORD}
       - DB_HOST=wordpressdb:3306
       - WP_VERSION=${WP_VERSION}
       - TMPDIR=/tmp
@@ -67,7 +67,7 @@ services:
       - WORDPRESS_DB_HOST=wordpressdb:3306
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PWD}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
       - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TBL_PREFIX}
       # SMTP Config
       - SMTP_HOST=wordpressmailer
@@ -107,7 +107,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${WORDPRESS_DB_ROOT_PWD}
       - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
       - MYSQL_USER=${WORDPRESS_DB_USER}
-      - MYSQL_PASSWORD=${WORDPRESS_DB_PWD}
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
 
   wordpressmailer:
     image: sj26/mailcatcher:latest

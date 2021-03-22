@@ -38,7 +38,8 @@ tasks:
 
   - init: >
       export WP_VERSION=5.5 &&
-      ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PWD}
+      ./manage.sh local-install ${WORDPRESS_DB_NAME} ${WORDPRESS_DB_USER} ${WORDPRESS_DB_PASSWORD} &&
+      cp .gitpod/wp-config-docker.php .gitpod/www/wp-config.php
     name: tests
     command: ./manage.sh local-test
 
@@ -57,9 +58,10 @@ tasks:
   # FIXME Mixed Content due HTTP content loaded over HTTPS
   - name: Apache + PHP-FPM
     command: >
+      gp await-port 3306 &&
       apachectl start &&
       /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
-      multitail /var/log/apache2/access.log -I /var/log/apache2/error.log -I /var/log/php/php-fpm.log
+      tail -f /var/log/apache2/access.log /var/log/apache2/error.log /var/log/php/php-fpm.log
 
 #vscode:
 #  extensions:

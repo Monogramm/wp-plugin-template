@@ -2,11 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 ports:
-  # apache wordpress
-  #- port: 8001
-  #  onOpen: open-preview
+  # FIXME PHP-FPM does not work here
   # nginx wordpress
-  - port: 8080
+  #- port: 8080
+  #  onOpen: open-preview
+  # apache wordpress
+  - port: 8001
     onOpen: open-preview
   # php-fpm
   - port: 9000
@@ -46,17 +47,19 @@ tasks:
     openMode: split-right
     command: MailHog
 
-  - name: Nginx + PHP-FPM
-    command: >
-      nginx &&
-      /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
-      multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
-
-  #- name: Apache + PHP-FPM
+  # FIXME PHP-FPM does not work here
+  #- name: Nginx + PHP-FPM
   #  command: >
-  #    apachectl start &&
-  #    /usr/sbin/php-fpm7.4 --fpm-config php-fpm.conf &&
+  #    nginx &&
+  #    /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
   #    multitail /var/log/nginx/access.log -I /var/log/nginx/error.log -I /var/log/php/php-fpm.log
+
+  # FIXME Mixed Content due HTTP content loaded over HTTPS
+  - name: Apache + PHP-FPM
+    command: >
+      apachectl start &&
+      /usr/sbin/php-fpm7.4 --fpm-config /etc/php/7.4/fpm/php-fpm.conf &&
+      multitail /var/log/apache2/access.log -I /var/log/apache2/error.log -I /var/log/php/php-fpm.log
 
 #vscode:
 #  extensions:

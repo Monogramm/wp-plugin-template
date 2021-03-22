@@ -18,9 +18,9 @@ RUN set -ex; \
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 COPY .gitpod/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 
-ENV WORDPRESS_DB_NAME=wordpressdb \
-    WORDPRESS_DB_USER=wordpress \
-    WORDPRESS_DB_PWD=wordpress \
+ENV WORDPRESS_DB_NAME=wordpress \
+    WORDPRESS_DB_USER=username \
+    WORDPRESS_DB_PWD=password \
     WORDPRESS_DB_HOST=localhost:3306 \
     WP_CORE_DIR=.gitpod/www \
     NGINX_DOCROOT_IN_REPO=.gitpod/www \

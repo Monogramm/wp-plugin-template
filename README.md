@@ -1,6 +1,7 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
 [![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://wordpress.org/plugins/wp-plugin-template/)
 [![gitmoji-changelog](https://img.shields.io/badge/Changelog-gitmoji-blue.svg)](https://github.com/frinyvonnick/gitmoji-changelog)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Monogramm/wp-plugin-template)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Monogramm/wp-plugin-template/Docker%20Image%20CI)](https://github.com/Monogramm/wp-plugin-template/actions)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b1db1c7d98f949e2897ac0f41fbbfb30)](https://www.codacy.com/gh/Monogramm/wp-plugin-template?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Monogramm/wp-plugin-template&amp;utm_campaign=Badge_Grade)
 [![GitHub stars](https://img.shields.io/github/stars/Monogramm/wp-plugin-template?style=social)](https://github.com/Monogramm/wp-plugin-template)
@@ -46,6 +47,17 @@ See [Taiga.io](https://tree.taiga.io/project/monogrammbot-monogrammwp-plugin-tem
 -->
 
 ## :construction: Install
+
+### Gitpod
+
+You can use [GitPod](https://gitpod.io/) to run a local development environment: [![open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Monogramm/wp-plugin-template)
+
+If you wish to sign your commits using GitPod, follow the instructions from [gitpod-io/gitpod#666](https://github.com/gitpod-io/gitpod/issues/666#issuecomment-534347856):
+
+-   Convert your source `.gnugpg` directory contents to base64 data: `tar -czvf - ./.gnupg | base64 -w 0`
+-   Place this data into a gitpod environment variable called `GNUGPG`
+-   Get your source signing key: `gpg --list-secret-keys --keyid-format LONG`
+-   Place this data into a gitpod environment variable called `GNUGPG_KEY`
 
 ### Docker
 
@@ -154,7 +166,7 @@ This template includes the following features:
 -   Full text of the AGPLv3 license
 -   Automated tests and code quality monitoring using PHPUnit, PHPCS and ESLint
 -   GitHub and GitLab templates for Issues and Pull Requests
--   Docker dev and test environments for easy integration into any CI (with current integration to Travis CI)
+-   Docker dev and test environments for easy integration into any CI (with current integration to Travis CI and GitHub Actions)
 -   Plugin install and uninstall hooks
 -   Easy class to manage shortcodes
 
@@ -181,7 +193,7 @@ The `sut` container will run:
 -   PHPUnit for this plugin
 -   PHPCS for Code quality
 
-You can also check Travis-CI [![Build Status](https://travis-ci.org/Monogramm/wp-plugin-template.svg)](https://travis-ci.org/Monogramm/wp-plugin-template) for the latest tests results.
+You can also check Travis-CI [Travis-CI](https://travis-ci.org/Monogramm/wp-plugin-template) or [GitHub Actions](https://github.com/Monogramm/wp-plugin-template/actions) for the latest tests results.
 
 To reset your test environment, you can just drop the containers and the persisted data:
 

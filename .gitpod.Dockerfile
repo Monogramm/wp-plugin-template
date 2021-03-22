@@ -12,7 +12,8 @@ RUN set -ex; \
 
 # Install php-fpm
 RUN set -ex; \
-    sudo apt-get install -y php-fpm php-xdebug
+    sudo apt-get update; \
+    sudo apt-get install -y php-fpm7.4 php7.4-xdebug
 
 COPY .gitpod/nginx.conf /etc/nginx/nginx.conf
 

@@ -8,7 +8,7 @@ services:
   sut:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.test
     depends_on:
       wordpress:
         condition: service_started

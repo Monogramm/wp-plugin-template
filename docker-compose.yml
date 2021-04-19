@@ -47,7 +47,7 @@ services:
     links:
       - wordpressdb
     expose:
-     - 80
+     - '80'
     ports:
      - "8080:80"
     volumes:
@@ -56,6 +56,7 @@ services:
       # To mount local plugin into WP
       - .:/var/www/html/wp-content/plugins/${WP_PLUGIN}
     environment:
+      - WP_DEBUG=true
       # Site Config
       - WORDPRESS_USERNAME=${WORDPRESS_ADMIN_LOGIN}
       - WORDPRESS_PASSWORD=${WORDPRESS_ADMIN_PWD}
@@ -96,8 +97,8 @@ services:
       retries: 5
     expose:
       - "3306"
-    #ports:
-    #  - "3306:3306"
+    ports:
+      - "33306:3306"
     volumes:
       - wordpress_db:/var/lib/mysql
       # If you want, you can sync time & timezone with host
@@ -115,7 +116,7 @@ services:
     container_name: wordpressmailer
     restart: always
     expose:
-      - 1025
+      - '1025'
     ports:
       - "1080:1080"
     # If you want, you can sync time & timezone with host

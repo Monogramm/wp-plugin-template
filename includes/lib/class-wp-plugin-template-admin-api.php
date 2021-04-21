@@ -86,6 +86,8 @@ class WP_Plugin_Template_Admin_API {
 
 			case 'password':
 			case 'number':
+			case 'range':
+			case 'date':
 			case 'hidden':
 				$min = '';
 				if ( isset( $field['min'] ) ) {
@@ -335,7 +337,9 @@ class WP_Plugin_Template_Admin_API {
 		}
 
 		foreach ( $fields as $field ) {
-			if ( isset( $_REQUEST[ $field['id'] ] ) ) { //phpcs:ignore
+			if ( empty( $field ) || ! isset( $field['id'] ) ) {
+				continue;
+			} elseif ( isset( $_REQUEST[ $field['id'] ] ) ) { //phpcs:ignore
 				update_post_meta( $post_id, $field['id'], $this->validate_field( $_REQUEST[ $field['id'] ], $field['type'] ) ); //phpcs:ignore
 			} else {
 				update_post_meta( $post_id, $field['id'], '' );

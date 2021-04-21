@@ -17,7 +17,7 @@ class WP_Plugin_Template_ShortCodes {
 	/**
 	 * The single instance of WP_Plugin_Template_ShortCodes.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template_ShortCodes|null
 	 * @access  private
 	 * @since   0.1.0
 	 */
@@ -26,7 +26,7 @@ class WP_Plugin_Template_ShortCodes {
 	/**
 	 * The main plugin object.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template|null
 	 * @access  public
 	 * @since   0.1.0
 	 */

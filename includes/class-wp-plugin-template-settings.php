@@ -17,7 +17,7 @@ class WP_Plugin_Template_Settings {
 	/**
 	 * The single instance of WP_Plugin_Template_Settings.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template_Settings|null
 	 * @access  private
 	 * @since   0.1.0
 	 */
@@ -26,7 +26,7 @@ class WP_Plugin_Template_Settings {
 	/**
 	 * The main plugin object.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template|null
 	 * @access  public
 	 * @since   0.1.0
 	 */

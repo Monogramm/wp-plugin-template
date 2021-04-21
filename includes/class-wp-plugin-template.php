@@ -17,7 +17,7 @@ class WP_Plugin_Template {
 	/**
 	 * The single instance of WP_Plugin_Template.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template|null
 	 * @access  private
 	 * @since   0.1.0
 	 */
@@ -28,12 +28,12 @@ class WP_Plugin_Template {
 	 *
 	 * @var WP_Plugin_Template_Admin_API|null
 	 */
-	public $admin = null;
+	public $admin_api = null;
 
 	/**
 	 * Settings class object.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template_Settings|null
 	 * @access  public
 	 * @since   0.1.0
 	 */
@@ -42,7 +42,7 @@ class WP_Plugin_Template {
 	/**
 	 * ShortCodes class object.
 	 *
-	 * @var     object
+	 * @var     WP_Plugin_Template_ShortCodes|null
 	 * @access  public
 	 * @since   0.1.0
 	 */
@@ -141,7 +141,7 @@ class WP_Plugin_Template {
 
 		// Load API for generic admin functions.
 		if ( is_admin() ) {
-			$this->admin = new WP_Plugin_Template_Admin_API();
+			$this->admin_api = new WP_Plugin_Template_Admin_API();
 		}
 
 		// Handle localisation.

@@ -83,6 +83,17 @@ class WP_Plugin_Template_Post_Type {
 		// Regsiter post type.
 		add_action( 'init', array( $this, 'register_post_type' ) );
 
+		// Register post type action on save.
+		if ( ! empty( $this->defaults ) ) {
+			add_action( "save_post_{$this->post_type}", array( $this, 'save_post_defaults' ), 10, 2 );
+		}
+
+		// Register post type custom fields.
+		if ( ! empty( $this->fields ) ) {
+			add_action( "add_meta_boxes_{$this->post_type}", array( $this, 'add_custom_meta_boxes' ) );
+			add_filter( "{$this->post_type}_custom_fields", array( $this, 'post_custom_fields' ) );
+		}
+
 		// Display custom update messages for posts edits.
 		add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_updated_messages' ), 10, 2 );
@@ -142,6 +153,35 @@ class WP_Plugin_Template_Post_Type {
 	}
 
 	/**
+	 * Add meta boxes for custom post type.
+	 *
+	 * @return void
+	 */
+	public function add_custom_meta_boxes() {
+		foreach ( $this->fields as $field ) {
+			if ( isset( $field['metaboxes'] ) ) {
+				foreach ( $field['metaboxes'] as $id => $metabox ) {
+					$title         = isset( $metabox['title'] ) ? $metabox['title'] : '';
+					$context       = isset( $metabox['context'] ) ? $metabox['context'] : 'advanced';
+					$priority      = isset( $metabox['priority'] ) ? $metabox['priority'] : 'default';
+					$callback_args = isset( $metabox['callback_args'] ) ? $metabox['callback_args'] : null;
+
+					WP_Plugin_Template::instance()->admin_api->add_meta_box( $id, $title, $this->post_type, $context, $priority, $callback_args );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get post type custom fields.
+	 *
+	 * @return array post type custom fields
+	 */
+	public function post_custom_fields() {
+		return $this->fields;
+	}
+
+	/**
 	 * Set up admin messages for post type
 	 *
 	 * @param  array $messages Default message.
@@ -187,6 +227,124 @@ class WP_Plugin_Template_Post_Type {
 		//phpcs:enable
 
 		return $bulk_messages;
+	}
+
+	/**
+	 * Saves post type default custom meta fields.
+	 *
+	 * @param  int     $post_id   Post ID.
+	 * @param  WP_Post $post  Post object.
+	 */
+	public function save_post_defaults( int $post_id, WP_Post $post ) {
+		if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_post' ) || $this->post_type !== $post->post_type ) {
+			return;
+		}
+
+		foreach ( $this->defaults as $key => $value ) {
+			switch ( $key ) {
+				case 'meta':
+					foreach ( $value as $meta_key => $meta_value ) {
+						if ( ! get_post_meta( $post_id, $meta_key, true ) ) {
+							update_post_meta( $post_id, $meta_key, $meta_value );
+						}
+					}
+					break;
+
+				default:
+					if ( empty( $post->$key ) ) {
+						$post->$key = $value;
+					}
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Retrieves an array of the latest posts, or posts matching the given criteria.
+	 *
+	 * @param  array $args      Arguments to retrieve posts.
+	 * @return WP_Post[]|int[]  Array of post objects or post IDs.
+	 */
+	public function get_posts( $args = array() ) {
+		$args = array_merge( $this->_query_args, $args );
+
+		return get_posts( $args );
+	}
+
+	/**
+	 * Retrieves a WP_Post instance of this post type.
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return WP_Post|false  Post object, false otherwise.
+	 */
+	public function get_instance( int $post_id ) {
+		global $wpdb;
+
+		$post_id = (int) $post_id;
+		if ( ! $post_id ) {
+			return false;
+		}
+
+		$_post = wp_cache_get( $post_id, 'posts' );
+
+		if ( ! $_post ) {
+			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d AND post_type = %s LIMIT 1", $post_id, $this->post_type ) );
+
+			if ( ! $_post ) {
+				return false;
+			}
+
+			$_post = sanitize_post( $_post, 'raw' );
+			wp_cache_add( $_post->ID, $_post, 'posts' );
+		} elseif ( empty( $_post->filter ) ) {
+			$_post = sanitize_post( $_post, 'raw' );
+		}
+
+		return new WP_Post( $_post );
+	}
+
+	/**
+	 * Create a new WP_Post instance of this post type.
+	 *
+	 * @return WP_Post  Post object.
+	 */
+	public function new_instance() {
+		$post            = new WP_Post( $_post );
+		$post->post_type = $this->post_type;
+
+		// Initialize post with default meta.
+		if ( ! empty( $this->meta ) ) {
+			foreach ( $this->meta as $key => $value ) {
+				$post->$key = $value;
+			}
+		}
+
+		return $post;
+	}
+
+	/**
+	 * Insert or update a post.
+	 *
+	 * @param  array $postarr An array of elements that make up a post to update or insert.
+	 * @param  bool  $wp_error Whether to return a WP_Error on failure.
+	 * @return int|WP_Error  The post ID on success. The value 0 or WP_Error on failure.
+	 */
+	public function insert( array $postarr, bool $wp_error = false ) {
+		$postarr['post_type'] = $this->post_type;
+
+		return wp_insert_post( $postarr, $wp_error );
+	}
+
+	/**
+	 * Retrieves a WP_Post instance terms of this post type.
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return WP_Term[]|false|WP_Error Array of WP_Term objects on success, false if there are no terms or the post does not exist, WP_Error on failure.
+	 */
+	public function get_terms( int $post_id ) {
+		$post = $this->get_instance( $post_id );
+
+		return get_the_terms( $post );
 	}
 
 }

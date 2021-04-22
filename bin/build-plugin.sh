@@ -9,7 +9,7 @@ read -r FOLDER
 printf "Include Grunt support (Y/n): "
 read -r GRUNT
 
-printf "Initialise new git repo (y/N): "
+printf "Initialize new git repo (y/N): "
 read -r NEWREPO
 
 set -e
@@ -59,9 +59,11 @@ mv "includes/lib/class-${DEFAULT_SLUG}-post-type.php" "includes/lib/class-${SLUG
 mv "includes/lib/class-${DEFAULT_SLUG}-taxonomy.php" "includes/lib/class-${SLUG}-taxonomy.php"
 mv "includes/lib/class-${DEFAULT_SLUG}-admin-api.php" "includes/lib/class-${SLUG}-admin-api.php"
 
+mv "includes/lib/class-${DEFAULT_SLUG}-admin-api.php" "includes/shortcodes/class-${SLUG}-shortcode-powered-by.php"
+
 mv "tests/${DEFAULT_CLASS}_Test.php" "tests/${CLASS}.php"
 
-for f in README.md readme.txt .gitmoji-changelogrc composer.json Gruntfile.js manage.sh package.json 'uninstall.php' 'bootstrap.php' "$SLUG.php" assets/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/class-$SLUG-shortcodes.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "tests/$CLASS.php" 'tests/SampleTest.php' '.env' '.travis.yml' '.phpcs.xml.dist' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md' '.gitpod.Dockerfile'
+for f in README.md readme.txt .gitmoji-changelogrc composer.json Gruntfile.js manage.sh package.json 'uninstall.php' 'bootstrap.php' "$SLUG.php" assets/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/class-$SLUG-shortcodes.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "includes/shortcodes/class-${SLUG}-shortcode-powered-by.php" "tests/$CLASS.php" 'tests/SampleTest.php' '.env' '.travis.yml' '.phpcs.xml.dist' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md' '.gitpod.Dockerfile'
 do
 	cp "$f" "$f.tmp"
 	sed "s/${DEFAULT_NAME}/${NAME}/g" "$f.tmp" > "$f"

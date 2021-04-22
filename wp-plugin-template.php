@@ -30,6 +30,10 @@ require_once 'includes/class-wp-plugin-template-shortcodes.php';
 require_once 'includes/lib/class-wp-plugin-template-admin-api.php';
 require_once 'includes/lib/class-wp-plugin-template-post-type.php';
 require_once 'includes/lib/class-wp-plugin-template-taxonomy.php';
+require_once 'includes/lib/class-wp-plugin-template-shortcode.php';
+
+// Load plugin custom shortcodes.
+require_once 'includes/shortcodes/class-wp-plugin-template-shortcode-powered-by.php';
 
 /**
  * Returns the main instance of WP_Plugin_Template to prevent the need to use globals.
@@ -47,6 +51,8 @@ function wp_plugin_template() {
 	if ( null === $instance->shortcodes ) {
 		$instance->shortcodes = WP_Plugin_Template_ShortCodes::instance( $instance );
 	}
+
+	$instance->add_shortcode( new WP_Plugin_Template_Shortcode_Powered_By( $instance ) );
 
 	return $instance;
 }

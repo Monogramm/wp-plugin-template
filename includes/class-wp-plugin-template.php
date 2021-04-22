@@ -192,6 +192,38 @@ class WP_Plugin_Template {
 	}
 
 	/**
+	 * Wrapper function to register a new shortcode.
+	 *
+	 * @param string $tag          Shortcode tag.
+	 * @param string $callback     Shortcode callback.
+	 * @param string $default_atts Shortcode default attributes.
+	 *
+	 * @return bool|string|WP_Plugin_Template_Shortcode
+	 */
+	public function register_shortcode( $tag, $callback, $default_atts = array() ) {
+		if ( ! $tag ) {
+			return false;
+		}
+
+		$shortcode = new WP_Plugin_Template_Shortcode( $this, $tag, $callback, $default_atts );
+
+		return $shortcode;
+	}
+
+	/**
+	 * Wrapper function to add a shortcode.
+	 *
+	 * @param WP_Plugin_Template_Shortcode $shortcode Shortcode.
+	 *
+	 * @return WP_Plugin_Template_Shortcode
+	 */
+	public function add_shortcode( $shortcode ) {
+		$this->shortcodes[ $shortcode->tag ] = $shortcode;
+
+		return $shortcode;
+	}
+
+	/**
 	 * Load frontend CSS.
 	 *
 	 * @access  public
@@ -277,7 +309,7 @@ class WP_Plugin_Template {
 	 * @param string $file File instance.
 	 * @param string $version Version parameter.
 	 *
-	 * @return Object WP_Plugin_Template instance
+	 * @return WP_Plugin_Template instance
 	 * @see WP_Plugin_Template()
 	 * @since 0.1.0
 	 * @static

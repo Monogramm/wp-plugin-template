@@ -70,7 +70,7 @@ class WP_Plugin_Template_ShortCodes {
 		$this->base      = 'wppt_';
 		$this->html_base = 'wppt-';
 
-		// Initialise shortcodes.
+		// Initialize shortcodes.
 		$this->init_shortcodes();
 
 		// Register plugin shortcodes.
@@ -78,7 +78,7 @@ class WP_Plugin_Template_ShortCodes {
 	}
 
 	/**
-	 * Initialise shortcodes
+	 * Initialize shortcodes
 	 *
 	 * @return void
 	 */
@@ -93,40 +93,9 @@ class WP_Plugin_Template_ShortCodes {
 	 */
 	private function define_shortcodes() {
 		$shortcodes = array(
-			'powered_by' => 'wppt_powered_by',
 		);
 
 		return $shortcodes;
-	}
-
-	/**
-	 * Build shortcode [wppt_powered_by].
-	 *
-	 * @param array  $atts     Shortcode attributes. Default empty.
-	 * @param string $content  Shortcode content. Default null.
-	 * @param string $tag      Shortcode tag (name). Default empty.
-	 * @return string The shortcode HTML content
-	 */
-	public function wppt_powered_by( $atts = array(), $content = null, $tag = '' ) {
-		// normalize attribute keys, lowercase.
-		$atts = array_change_key_case( (array) $atts, CASE_LOWER );
-
-		// override default attributes with user attributes.
-		$sc_atts = shortcode_atts(
-			array(),
-			$atts
-		);
-
-		// Start section.
-		$output = __( 'Powered by WP Plugin Template', 'wp-plugin-template' );
-
-		// enclosing tags.
-		if ( ! is_null( $content ) ) {
-			// run shortcode parser recursively.
-			$output .= do_shortcode( $content );
-		}
-
-		return $output;
 	}
 
 	/**
@@ -151,8 +120,8 @@ class WP_Plugin_Template_ShortCodes {
 	 * @since 0.1.0
 	 * @static
 	 * @see WP_Plugin_Template()
-	 * @param object $parent Object instance.
-	 * @return object WP_Plugin_Template_ShortCodes instance
+	 * @param WP_Plugin_Template $parent Object instance.
+	 * @return WP_Plugin_Template_ShortCodes instance
 	 */
 	public static function instance( $parent ) {
 		if ( null === self::$_instance ) {

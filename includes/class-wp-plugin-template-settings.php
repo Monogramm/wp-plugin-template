@@ -60,7 +60,7 @@ class WP_Plugin_Template_Settings {
 
 		$this->base = 'wppt_';
 
-		// Initialise settings.
+		// Initialize settings.
 		add_action( 'init', array( $this, 'init_settings' ), 11 );
 
 		// Register plugin settings.
@@ -83,7 +83,7 @@ class WP_Plugin_Template_Settings {
 	}
 
 	/**
-	 * Initialise settings
+	 * Initialize settings
 	 *
 	 * @return void
 	 */
@@ -467,8 +467,8 @@ class WP_Plugin_Template_Settings {
 	 * @since 0.1.0
 	 * @static
 	 * @see WP_Plugin_Template()
-	 * @param object $parent Object instance.
-	 * @return object WP_Plugin_Template_Settings instance
+	 * @param WP_Plugin_Template $parent Object instance.
+	 * @return WP_Plugin_Template_Settings instance
 	 */
 	public static function instance( $parent ) {
 		if ( null === self::$_instance ) {

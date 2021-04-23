@@ -60,15 +60,44 @@ class WP_Plugin_Template_Post_Type {
 	public $options;
 
 	/**
-	 * Constructor
+	 * The default custom meta of the custom post type.
+	 *
+	 * @var     array
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $defaults;
+
+	/**
+	 * The default custom fields of the custom post type.
+	 *
+	 * @var     array
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $fields;
+
+	/**
+	 * The registered post type object.
+	 *
+	 * @var     WP_Post_Type|null
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $post_type_ob;
+
+	/**
+	 * Constructor.
 	 *
 	 * @param string $post_type Post type.
 	 * @param string $plural Post type plural name.
 	 * @param string $single Post type singular name.
 	 * @param string $description Post type description.
 	 * @param array  $options Post type options.
+	 * @param array  $defaults Post type default values.
+	 * @param array  $fields Post type custom fields.
 	 */
-	public function __construct( $post_type = '', $plural = '', $single = '', $description = '', $options = array() ) {
+	public function __construct( $post_type = '', $plural = '', $single = '', $description = '', $options = array(), $defaults = array(), $fields = array() ) {
 		if ( ! $post_type || ! $plural || ! $single ) {
 			return;
 		}
@@ -79,6 +108,11 @@ class WP_Plugin_Template_Post_Type {
 		$this->single      = $single;
 		$this->description = $description;
 		$this->options     = $options;
+		$this->defaults    = $defaults;
+		$this->fields      = $fields;
+		$this->_query_args = array(
+			'post_type' => $this->post_type,
+		);
 
 		// Regsiter post type.
 		add_action( 'init', array( $this, 'register_post_type' ) );
@@ -149,7 +183,7 @@ class WP_Plugin_Template_Post_Type {
 
 		$args = array_merge( $args, $this->options );
 
-		register_post_type( $this->post_type, apply_filters( $this->post_type . '_register_args', $args, $this->post_type ) );
+		$this->post_type_ob = register_post_type( $this->post_type, apply_filters( $this->post_type . '_register_args', $args, $this->post_type ) );
 	}
 
 	/**
@@ -235,7 +269,7 @@ class WP_Plugin_Template_Post_Type {
 	 * @param  int     $post_id   Post ID.
 	 * @param  WP_Post $post  Post object.
 	 */
-	public function save_post_defaults( int $post_id, WP_Post $post ) {
+	public function save_post_defaults( $post_id, WP_Post $post ) {
 		if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_post' ) || $this->post_type !== $post->post_type ) {
 			return;
 		}
@@ -275,9 +309,10 @@ class WP_Plugin_Template_Post_Type {
 	 * Retrieves a WP_Post instance of this post type.
 	 *
 	 * @param  int $post_id Post ID.
+	 *
 	 * @return WP_Post|false  Post object, false otherwise.
 	 */
-	public function get_instance( int $post_id ) {
+	public function get_instance( $post_id ) {
 		global $wpdb;
 
 		$post_id = (int) $post_id;
@@ -327,9 +362,10 @@ class WP_Plugin_Template_Post_Type {
 	 *
 	 * @param  array $postarr An array of elements that make up a post to update or insert.
 	 * @param  bool  $wp_error Whether to return a WP_Error on failure.
+	 *
 	 * @return int|WP_Error  The post ID on success. The value 0 or WP_Error on failure.
 	 */
-	public function insert( array $postarr, bool $wp_error = false ) {
+	public function insert( array $postarr, $wp_error = false ) {
 		$postarr['post_type'] = $this->post_type;
 
 		return wp_insert_post( $postarr, $wp_error );
@@ -338,13 +374,15 @@ class WP_Plugin_Template_Post_Type {
 	/**
 	 * Retrieves a WP_Post instance terms of this post type.
 	 *
-	 * @param  int $post_id Post ID.
+	 * @param  int    $post_id Post ID.
+	 * @param  string $taxonomy Taxonomy name.
+	 *
 	 * @return WP_Term[]|false|WP_Error Array of WP_Term objects on success, false if there are no terms or the post does not exist, WP_Error on failure.
 	 */
-	public function get_terms( int $post_id ) {
+	public function get_terms( $post_id, $taxonomy ) {
 		$post = $this->get_instance( $post_id );
 
-		return get_the_terms( $post );
+		return get_the_terms( $post, $taxonomy );
 	}
 
 }

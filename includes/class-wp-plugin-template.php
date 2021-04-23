@@ -171,6 +171,19 @@ class WP_Plugin_Template {
 	}
 
 	/**
+	 * Wrapper function to add a post type.
+	 *
+	 * @param WP_Plugin_Template_Post_Type $post_type Post type.
+	 *
+	 * @return WP_Plugin_Template_Post_Type
+	 */
+	public function add_post_type( WP_Plugin_Template_Post_Type $post_type ) {
+		$this->post_types[ $post_type->post_type ] = $post_type;
+
+		return $post_type;
+	}
+
+	/**
 	 * Wrapper function to register a new taxonomy.
 	 *
 	 * @param string $taxonomy Taxonomy.
@@ -187,6 +200,19 @@ class WP_Plugin_Template {
 		}
 
 		$taxonomy = new WP_Plugin_Template_Taxonomy( $taxonomy, $plural, $single, $post_types, $taxonomy_args );
+
+		return $taxonomy;
+	}
+
+	/**
+	 * Wrapper function to add a taxonomy.
+	 *
+	 * @param WP_Plugin_Template_Taxonomy $taxonomy Taxonomy.
+	 *
+	 * @return WP_Plugin_Template_Taxonomy
+	 */
+	public function add_taxonomy( WP_Plugin_Template_Taxonomy $taxonomy ) {
+		$this->taxonomies[ $taxonomy->taxonomy ] = $taxonomy;
 
 		return $taxonomy;
 	}
@@ -217,7 +243,7 @@ class WP_Plugin_Template {
 	 *
 	 * @return WP_Plugin_Template_Shortcode
 	 */
-	public function add_shortcode( $shortcode ) {
+	public function add_shortcode( WP_Plugin_Template_Shortcode $shortcode ) {
 		$this->shortcodes[ $shortcode->tag ] = $shortcode;
 
 		return $shortcode;

@@ -52,7 +52,7 @@ function wp_plugin_template() {
 		$instance->shortcodes = WP_Plugin_Template_ShortCodes::instance( $instance );
 	}
 
-	$instance->add_shortcode( new WP_Plugin_Template_Shortcode_Powered_By( $instance ) );
+	$instance->add_shortcode( WP_Plugin_Template_Shortcode_Powered_By::instance( $instance ) );
 
 	return $instance;
 }

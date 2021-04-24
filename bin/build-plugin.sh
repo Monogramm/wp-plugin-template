@@ -63,7 +63,7 @@ mv "includes/lib/class-${DEFAULT_SLUG}-admin-api.php" "includes/shortcodes/class
 
 mv "tests/${DEFAULT_CLASS}_Test.php" "tests/${CLASS}.php"
 
-for f in README.md readme.txt .gitmoji-changelogrc composer.json Gruntfile.js manage.sh package.json 'uninstall.php' 'bootstrap.php' "$SLUG.php" assets/js/*.js "lang/$SLUG.pot" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/class-$SLUG-shortcodes.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "includes/shortcodes/class-${SLUG}-shortcode-powered-by.php" "tests/$CLASS.php" 'tests/SampleTest.php' '.env' '.travis.yml' '.phpcs.xml.dist' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md' '.gitpod.Dockerfile'
+for f in README.md readme.txt .gitmoji-changelogrc composer.json Gruntfile.js manage.sh package.json 'index.php' 'uninstall.php' 'bootstrap.php' "$SLUG.php" assets/js/*.js "lang/$SLUG.pot" "includes/index.php" "includes/class-$SLUG.php" "includes/class-$SLUG-settings.php" "includes/class-$SLUG-shortcodes.php" "includes/lib/class-$SLUG-post-type.php" "includes/lib/class-$SLUG-taxonomy.php" "includes/lib/class-$SLUG-admin-api.php" "includes/shortcodes/class-${SLUG}-shortcode-powered-by.php" "tests/$CLASS.php" 'tests/SampleTest.php' '.env' '.travis.yml' '.phpcs.xml.dist' '.github/PULL_REQUEST_TEMPLATE.md' '.gitlab/merge_request_templates/merge_request_template.md' '.gitpod.Dockerfile'
 do
 	cp "$f" "$f.tmp"
 	sed "s/${DEFAULT_NAME}/${NAME}/g" "$f.tmp" > "$f"

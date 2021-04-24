@@ -2,7 +2,7 @@
 /**
  * Taxonomy functions file.
  *
- * @package WP Plugin Template/Includes
+ * @package WP Plugin Template/Includes/Lib
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

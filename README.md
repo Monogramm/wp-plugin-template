@@ -1,5 +1,5 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://wordpress.org/plugins/wp-plugin-template/)
+[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/wp-plugin-template/)
 [![gitmoji-changelog](https://img.shields.io/badge/Changelog-gitmoji-blue.svg)](https://github.com/frinyvonnick/gitmoji-changelog)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Monogramm/wp-plugin-template)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Monogramm/wp-plugin-template/Docker%20Image%20CI)](https://github.com/Monogramm/wp-plugin-template/actions)
@@ -29,6 +29,13 @@ This template is highly inspired from [hlashbrooke/WordPress Plugin Template](ht
 ## :blue_book: Docs
 
 See WordPress.org plugin at [wordpress.org/plugins/wp-plugin-template](https://wordpress.org/plugins/wp-plugin-template/).
+
+A technical documentation is also available at <https://monogramm.github.io/wp-plugin-template/>.
+You can generate the PHP documentation using PHPDocumentor:
+
+```bash
+docker run --rm -v "${PWD}:/data phpdoc/phpdoc:3" run
+```
 
 ## :chart_with_upwards_trend: Changes
 

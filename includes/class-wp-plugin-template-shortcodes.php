@@ -2,7 +2,7 @@
 /**
  * ShortCodes class file.
  *
- * @package WP Plugin Template/ShortCodes
+ * @package WP Plugin Template/Includes
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

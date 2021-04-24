@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Shortcode functions class.
+ * Powered By Shortcode functions class.
  */
 class WP_Plugin_Template_Shortcode_Powered_By extends WP_Plugin_Template_Shortcode {
 

@@ -2,7 +2,7 @@
 /**
  * Settings class file.
  *
- * @package WP Plugin Template/Settings
+ * @package WP Plugin Template/Includes
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

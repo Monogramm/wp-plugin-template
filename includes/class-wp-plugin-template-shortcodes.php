@@ -92,8 +92,7 @@ class WP_Plugin_Template_ShortCodes {
 	 * @return array ShortCodes to be registered as tag -> callback.
 	 */
 	private function define_shortcodes() {
-		$shortcodes = array(
-		);
+		$shortcodes = array();
 
 		return $shortcodes;
 	}

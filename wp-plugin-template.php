@@ -48,8 +48,8 @@ function wp_plugin_template() {
 		$instance->settings = WP_Plugin_Template_Settings::instance( $instance );
 	}
 
-	if ( null === $instance->shortcodes ) {
-		$instance->shortcodes = WP_Plugin_Template_ShortCodes::instance( $instance );
+	if ( null === $instance->shortcodes_api ) {
+		$instance->shortcodes_api = WP_Plugin_Template_ShortCodes::instance( $instance );
 	}
 
 	$instance->add_shortcode( WP_Plugin_Template_Shortcode_Powered_By::instance( $instance ) );

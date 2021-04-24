@@ -46,7 +46,34 @@ class WP_Plugin_Template {
 	 * @access  public
 	 * @since   0.1.0
 	 */
-	public $shortcodes = null;
+	public $shortcodes_api = null;
+
+	/**
+	 * Post types list.
+	 *
+	 * @var     WP_Plugin_Template_Post_Type[]
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $post_types = array();
+
+	/**
+	 * Taxonomies list.
+	 *
+	 * @var     WP_Plugin_Template_Taxonomy[]
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $taxonomies = array();
+
+	/**
+	 * Shortcodes list.
+	 *
+	 * @var     WP_Plugin_Template_Shortcode[]
+	 * @access  public
+	 * @since   0.1.0
+	 */
+	public $shortcodes = array();
 
 	/**
 	 * The version number.

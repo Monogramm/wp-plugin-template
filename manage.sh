@@ -10,6 +10,10 @@ log() {
     echo "[${0}] [$(date +%Y-%m-%dT%H:%M:%S)] $*"
 }
 
+build_archive() {
+    ./bin/generate-plugin-zip.sh "${WP_PLUGIN}"
+}
+
 prepare_release() {
     NEW_VERSION=${1}
     if [ -z "${NEW_VERSION}" ] ; then
@@ -17,20 +21,26 @@ prepare_release() {
         return 1;
     fi
 
-    log 'TODO Updating app version...'
+    log 'Updating app version...'
     sed -i \
         -e "s|\"version\": \".*\"|\"version\": \"${NEW_VERSION}\"|g" \
-        ./.gitmoji-changelogrc
+        ./.gitmoji-changelogrc ./composer.json ./package.json
 
     log 'Updating plugin version...'
     sed -i \
-        -e "s|version = '.*'|version = '${NEW_VERSION}'|g" \
+        -e "s|\$version = '.*'|\$version = '${NEW_VERSION}'|g" \
         ./includes/"class-${WP_PLUGIN}.php"
 
     sed -i \
         -e "s|Version: .*|Version: ${NEW_VERSION}|g" \
+        -e "s|Tested up to: .*|Tested up to: ${WP_VERSION}|g" \
         -e "s| __FILE__, '.*' | __FILE__, '${NEW_VERSION}' |g" \
         ./"${WP_PLUGIN}.php"
+
+    sed -i \
+        -e "s|Stable tag: .*|Stable tag: ${NEW_VERSION}|g" \
+        -e "s|Tested up to: .*|Tested up to: ${WP_VERSION}|g" \
+        ./readme.txt
 
     # Generate Changelog for version
     log "Generating Changelog for version '${NEW_VERSION}'..."
@@ -39,7 +49,7 @@ prepare_release() {
 
     # TODO Add and commit to git with message `:bookmark: Release X.Y.Z`
 
-    ./bin/generate-plugin-zip.sh "${WP_PLUGIN}"
+    build_archive
 }
 
 usage() {
@@ -52,6 +62,7 @@ usage() {
         local-i18n          Update i18n locales
         local-clean         Minify and clean source code
         local-prep-release  Prepare app release
+        local-archive       Build local ZIP archive
 
         start               Start dev / test env (docker)
         stop                Stop dev / test env
@@ -91,6 +102,9 @@ case "${1}" in
     npm run start
     prepare_release "${@:2}";;
 
+    local-archive)
+    build_archive;;
+
     # DEV env
     start) docker-compose up -d "${@:2}";;
     stop) docker-compose down "${@:2}";;
@@ -112,11 +126,6 @@ case "${1}" in
     sut) docker-compose run -T sut "${@:2}";;
     phpcbf) docker-compose run -T sut ./vendor/bin/phpcbf;;
     wp) docker-compose exec -T --user www-data wordpress wp "${@:2}";;
-    i18n) npm install
-    npm run i18n;;
-    build) build;;
-    prepare-release) build
-    prepare_release "${@:2}";;
     # Help
     *) usage;;
 esac

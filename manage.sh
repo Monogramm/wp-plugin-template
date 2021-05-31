@@ -65,7 +65,8 @@ usage() {
         local-archive       Build local ZIP archive
 
         start               Start dev / test env (docker)
-        stop                Stop dev / test env
+        stop                Stop dev / test env (docker)
+        setup_debug         Setup WP_DEBUG to true (docker)
         test                Start test env and verify plugin install correctly
         logs                Follow logs of dev / test env
         reset               Reset all data of dev / test env
@@ -108,6 +109,7 @@ case "${1}" in
     # DEV env
     start) docker-compose up -d "${@:2}";;
     stop) docker-compose down "${@:2}";;
+    setup_debug) docker-compose exec -T --user www-data wordpress sed -i -e "s|define( 'WP_DEBUG', .* );|define( 'WP_DEBUG', true );|m" wp-config.php;;
     test) set -e
     docker-compose build
     docker-compose down -v
